@@ -1,0 +1,237 @@
+
+/* ============> this style sheet is for portfolio main page (lamnguyen.ca) <================= */
+
+:root {
+  /* Core Colors */
+  --bg-color: #050505; /* Deep, deep black */
+  --text-color: #f5f5f7; /* Off-white for readability */
+  --accent-color: #2997ff; /* vibrant blue */
+  --muted-color: #86868b;
+  
+  /* Liquid Glass Variables */
+  --glass-surface: #1e1e1e66; /* Dark, translucent base */
+  --glass-border: #ffffff14; /* Subtle highlight */
+  --glass-highlight: #ffffff26; /* Top edge reflection */
+  --glass-blur: 20px; /* Heavy blur for depth */
+  --glass-saturate: 180%; /* Vibrancy boost behind the glass */
+  --glass-radius: 24px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  /* Optional: Add a mesh gradient background here so the glass has something to blur */
+  background-image: 
+    radial-gradient (circle at 15% 50%, #2997ff26, transparent 25%),
+    radial-gradient (circle at 85% 30%, #6432ff1a, transparent 25%);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* --- Layout --- */
+
+.main-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.content-div {
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+  margin: auto;
+}
+
+/* --- Typography & Branding --- */
+
+.brand-name {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.status-message {
+  font-size: 1.1rem;
+  color: var(--muted-color);
+  margin-bottom: 3rem;
+  transition: opacity 0.5s ease;
+  opacity: 1;
+  font-weight: 400;
+}
+
+.status-message.hidden {
+  opacity: 0;
+}
+
+/* --- Glass Projects Container --- */
+
+.projects-container {
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-top: 1px solid var(--glass-highlight); /* Top light reflection */
+  border-radius: var(--glass-radius);
+  padding: 2.5rem;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4), /* Deep shadow */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05); /* Inner rim */
+  margin: 2rem auto;
+  transition: transform 0.3s ease;
+}
+
+.projects-header {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 1.5rem 0;
+  color: #fff;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --- Liquid Project Items --- */
+
+.project-item {
+  flex: 1;
+  min-width: 200px;
+}
+
+.project-anchor {
+  display: block;
+  text-decoration: none;
+  color: var(--text-color);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effect: "Liquid" fill */
+.project-anchor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.project-anchor:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.project-anchor:hover::before {
+  transform: translateX(100%);
+}
+
+/* --- Loading Indicator --- */
+
+.loading-indicator {
+  width: 100%;
+  max-width: 240px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.loading-indicator::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 40%;
+  background: var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color); /* Glow effect */
+  border-radius: 10px;
+  animation: slide-bar 1.5s infinite cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@keyframes slide-bar {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}
+
+/* --- Footer --- */
+
+footer {
+  width: 100%;
+  padding: 2rem 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--glass-border);
+}
+
+.footer-text-div {
+  text-align: center;
+  color: var(--muted-color);
+}
+
+.footer-text h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.studio-div > img {
+  width: 80px; /* Smaller, cleaner logo sizing */
+  opacity: 0.8;
+  padding-bottom: 1rem;
+}
+
+.last-updated-text {
+  color: #555;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Mobile Responsiveness --- */
+
+@media only screen and (max-width: 768px) {
+  .brand-name {
+    font-size: 2.5rem;
+  }
+  
+  .projects-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .project-links {
+    flex-direction: column;
+  }
+}
