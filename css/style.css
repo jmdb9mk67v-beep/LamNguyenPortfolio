@@ -7,6 +7,7 @@
   --text-color: #f5f5f7; /* Off-white for readability */
   --accent-color: #2997ff; /* vibrant blue */
   --muted-color: #86868b;
+  --anchor-color: #fb04e7;
   
   /* Liquid Glass Variables */
   --glass-surface: #1e1e1e66; /* Dark, translucent base */
@@ -118,7 +119,7 @@ body {
 .project-anchor {
   display: block;
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--anchor-color);
   background: rgba(255, 255, 255, 0.03);
   padding: 1rem 1.5rem;
   border-radius: 16px;
@@ -147,10 +148,14 @@ body {
   border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  color: var(--text-color);
 }
 
 .project-anchor:hover::before {
   transform: translateX(100%);
+  color: #fff;
+  border-color: #fff;
+  background: #ffffff1a;
 }
 
 /* --- Loading Indicator --- */

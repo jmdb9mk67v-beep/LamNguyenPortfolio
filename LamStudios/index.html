@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+  <title>html_assignment_4</title>
+</head>
+<body>
+
+  <div id="lightbox" onclick="hideBox();">
+    <img id="lightboxImage" src="https://placeholdit.com/500x500"  alt="thebigpic">
+  </div>
+
+  <div id="logoBox">
+  <a class="logo" href="index.html" title="home">
+    <img src="assets/images/logo.png" alt="Logo"  class="logo">
+  </a>
+  </div>
+  <div id="socialBox">
+    <img src="assets/images/x.png" alt="x" class="icon">
+    <img src="assets/images/linkedin.png" alt="linkedin"  class="icon">
+    <img src="assets/images/fb.png" alt="facebook"  class="icon">
+    <img src="assets/images/instagram.png" alt="instagram"  class="icon">
+  </div>
+  <div id="hamburger" onclick="toggleMenu();">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <nav>
+    <a href="index.html" title="home" onclick="closeNav();">home</a>
+    <a href="#about" title="about" onclick="closeNav();">about</a>
+    <a href="#tempHeading" title="templates" onclick="closeNav();">templates</a>
+    <a href="#contact" title="contact" onclick="closeNav();">contact</a>
+    <a href="#services" title="services" onclick="closeNav();">services</a>
+  </nav>
+  <div id="grid">
+  <header id="header">
+  </header>
+    <div id="welcomeBox">
+        <h1>LAM STUDIOS</h1>
+        <h2>Where Human and AI 
+        build the Web Together</h2>
+    </div>
+  
+    <div id="home">
+      <h1>Welcome!</h1>
+      <br>
+      <div style="height: auto;">
+        <img src="assets/images/welcomeImg.png" alt="welcomeImg"  class="welcomeImg">
+        <img src="assets/images/welcomeImg2.png" alt="welcomeImg2"  class="welcomeImg">
+      </div>
+       <p>
+          We specialize in helping people bring their ideas to life with modern, 
+          creative, and functional web designs.  
+           Our team is passionate about combining aesthetics with 
+          technology to create websites that are not only beautiful but also easy to use. 
+          <br> Whether you’re starting a new business or looking to refresh your online presence, 
+          we’re here to help you every step of the way.
+        </p>
+      </div>
+      <div id="homeBot">
+        <h1 class="homeBotheading">Have AI Generate Images for your Website!</h1>
+        <p class="homeBotpara">
+          At Lam Studios, we turn your vision into reality.  From sleek, modern websites to user-friendly 
+          designs, we make sure your online presence stands out. 
+          <br>Our AI-powered tools make creating stunning, 
+          modern sites fast, easy, and fun.  Bring your ideas to life today!  
+           Let’s build something amazing together and
+          build the future of your website with Lam Studios! 
+        </p>
+        <img src="assets/images/homeBot1.png" alt="homeBot1"  class="homeBot-img">
+        <img src="assets/images/homeBot2.png" alt="homeBot2"  class="homeBot-img">
+        <img src="assets/images/homeBot3.png" alt="homeBot3"  class="homeBot-img">
+        <img src="assets/images/homeBot4.png" alt="homeBot4"  class="homeBot-img">
+        <img src="assets/images/homeBot5.png" alt="homeBot5"  class="homeBot-img">
+        <img src="assets/images/homeBot6.png" alt="homeBot6"  class="homeBot-img">
+      </div>
+    
+    <div id="about">
+      <h1 class="aboutHeading">About Us</h1>
+      <div>
+        <img src="assets/images/aboutImg1.png" alt="aboutImg1" class="aboutImg" onclick="showAboutBox(1)">
+          <h2><br>AIVA (Artificial Intelligence Virtual Assistant)</h2><br>
+          <p class="aboutText">Chief Digital Architect – oversees design automation and AI-assisted 
+            web development.
+          </p>
+      </div>
+      <div>       
+        <img src="assets/images/aboutImg3.png"  alt="aboutImg3" class="aboutImg"  onclick="showAboutBox(3)">
+        <h2><br>LAMI - (Linked Artificial Mind Intelligence)</h2><br>
+        <p class="aboutText">Virtual Design Consultant – helps clients visualize and customize their websites.  LAMI is the 
+           android AI responsible for transforming creative ideas into dynamic website
+           designs. She collaborates with clients and developers to ensure every project
+           blends art, technology, and intelligence.</p>
+      </div>
+      <div>
+          <img src="assets/images/aboutImg2.png" alt="aboutImg2" class="aboutImg" onclick="showAboutBox(2)">
+          <h2><br>EVE-9 (Evokes Advanced Design and Precision)</h2><br>
+          <p class="aboutText">Creative Intelligence Director – responsible for concept generation, 
+             layout optimization, and branding guidance.
+          </p>
+      </div>
+      <div>
+        <img src="assets/images/aboutImg4.png" alt="aboutImg4" class="aboutImg" onclick="showAboutBox(4)">
+          <h2><br>LUCY – (Learning Unit for Creative Yield)</h2><br>
+          <p class="aboutText">Innovation Core (AIC) – the “brain” of Lam Studios that powers all smart design decisions.
+            An advanced AI android who collaborates directly with human designers. 
+            She analyzes user behavior, optimizes layouts, and ensures every website is as intelligent 
+            as it is beautiful.
+          </p>
+      </div>
+      <div>
+        <img src="assets/images/aboutImg6.png" alt="aboutImg6" class="aboutImg" onclick="showAboutBox(6)">
+          <h2><br>ARIA – Human-like for a friendly AI presence.</h2><br>
+          <p class="aboutText">System Integration Specialist – manages communication between AI tools and client platforms.  Systematically
+            checks for bugs and viruses.  Champion debugger.
+          </p>
+      </div>
+      <div>
+        <img src="assets/images/aboutImg5.png" alt="aboutImg5" class="aboutImg" onclick="showAboutBox(5)">
+          <h2><br>LYRA – (Luminary Yield Research Algorithm)</h2><br>
+          <p class="aboutText">The “research android” of Lam Studios — constantly analyzing 
+            design trends and suggesting innovative layouts based on data and creativity.
+          </p>
+      </div>
+    </div>
+    
+    <div id="tempHeading">
+        <h1>Create and Build</h1><br>
+        <p>Behind Lam Studios is a unique team of creative minds and advanced
+         artificial intelligences working side by side. Our designers and developers
+         work closely with LAMI, our android AI and Chief Digital Architect, who
+         transforms concepts into smart, functional layouts with data-driven 
+         design insight. Alongside her are talented humans (C.E.O Mike Lowrey) who add warmth, 
+         storytelling, and artistic direction — ensuring every website captures
+         the human touch that technology alone cannot replicate. Together, our
+         human-AI team builds with balance, creativity, and purpose.
+        </p>       
+    </div>    
+    <div id="templates"> 
+      <h2 class="tempHead">Choose one of our templates or simple build your own!</h2>
+      <img src="assets/images/template1.png" alt="template" class="tempImg" onclick="showBox(1)">
+      <img src="assets/images/template2.png" alt="template" class="tempImg" onclick="showBox(2)">
+      <img src="assets/images/template3.png" alt="template" class="tempImg" onclick="showBox(3)">
+      <img src="assets/images/template4.png" alt="template" class="tempImg" onclick="showBox(4)">
+      <img src="assets/images/template5.png" alt="template" class="tempImg" onclick="showBox(5)">
+      <img src="assets/images/template6.png" alt="template" class="tempImg" onclick="showBox(6)">
+      <img src="assets/images/template7.png" alt="template" class="tempImg" onclick="showBox(7)">
+      <img src="assets/images/template8.png" alt="template" class="tempImg" onclick="showBox(8)">
+      <img src="assets/images/template9.png" alt="template" class="tempImg" onclick="showBox(9)">
+      <img src="assets/images/template10.png" alt="template" class="tempImg"  onclick="showBox(10)">
+      <img src="assets/images/template11.png" alt="template" class="tempImg"  onclick="showBox(11)">
+      <img src="assets/images/template12.png" alt="template" class="tempImg"  onclick="showBox(12)">
+    </div>
+    <div id="contact">
+      <h1>Contact Us</h1>
+          <p>Step into the future of web design. Contact Lam Studios to collaborate with our creative
+          team and LAMI, our intelligent AI designer. Together, we’ll craft a smart, beautiful, and
+          responsive website built by both human imagination and artificial intelligence.
+          </p>
+        <img src="assets/images/contactImg4.png" alt="contactImg" class="contactImg">
+      <form class="contact-form" onsubmit="return showMessage(event)">
+            <h3>Create and Build a Website...Today!</h3>
+            <br>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            <label for="subject">Type of website (business, personal, corporate..)</label>
+            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+            <label for="message">Details of your vision of website</label>
+            <textarea id="message" name="message" placeholder="Modern, futuristic, business professional, colors.." required></textarea>
+            <button type="submit">Send Message</button>
+            <p id="successMsg" class="success" style="display:none;">Thank you! Your message has been sent.</p>
+        </form>       
+    </div>
+  </div> 
+    <div id="services">
+      <h1>AI Website Builder - Service Features</h1>
+        <br>
+        <p>Automatic website creation, AI generates a full website based on a short description
+           from you.  Auto-builds homepage, about page, services, and contact sections.  We 
+           offer multiple layout/theme suggestions instantly.  Check off what you would like on your website.
+        </p>
+        <br><br>
+      <div class="serviceLeft">
+        <button type="button" title="Smart Design Customization" value="Smart Design Customization" class="button" 
+                onclick="addItem(this.value, 0);">Smart Design Customization
+        </button>
+        <button type="button" title="Auto-Generated Content"  value="Auto-Generated Content" class="button" 
+        onclick="addItem(this.value, 1);">Auto-Generated Content
+        </button>
+        <button type="button" title="Image Generation & Editing"  value="Image Generation & Editing" class="button" 
+        onclick="addItem(this.value, 2);">Image Generation & Editing
+        </button>
+        <button type="button" title="SEO Optimization (Search Engine Optimization)"  value="SEO Optimization (Search Engine Optimization)" class="button" 
+        onclick="addItem(this.value, 3);">SEO Optimization (Search Engine Optimization)
+        </button>
+        <button type="button" title="Mobile-Responsive Design"  value="Mobile-Responsive Design" class="button" 
+        onclick="addItem(this.value, 4);">Mobile-Responsive Design
+        </button>
+        <button type="button" title="Built-In Analytics"  value="Built-In Analytics" class="button" 
+        onclick="addItem(this.value, 5);">Built-In Analytics
+        </button>
+        <button type="button" title="AI Chatbot Setup"  value="AI Chatbot Setup" class="button" 
+        onclick="addItem(this.value, 6);">AI Chatbot Setup
+        </button>
+        <button type="button" title="Form Builder"  value="Form Builder" class="button" 
+        onclick="addItem(this.value, 7);">Form Builder
+        </button>
+        <button type="button" title="Branding Tools"  value="Branding Tools" class="button" 
+        onclick="addItem(this.value, 8);">Branding Tools
+        </button>
+        <button type="button" title="Hosting & Deployment"  value="Hosting & Deployment" class="button" 
+        onclick="addItem(this.value, 9);">Hosting & Deployment
+        </button>
+        <button type="button" title="E-Commerce Features"  value="E-Commerce Features" class="button" 
+        onclick="addItem(this.value, 10);">E-Commerce Features
+        </button>
+        <button type="button" title="Automated Updates" value="Automated Updates" class="button"
+        onclick="addItem(this.value, 11);">Automated Updates
+        </button>
+        <button type="button" title="Ongoing AI Assistance" value="Ongoing AI Assistance" class="button"
+        onclick="addItem(this.value, 11);">Ongoing AI Assistance
+        </button>
+      </div>
+      <div class="serviceRight"></div>
+      
+      <button type="button" class="reset" onclick="reset();">Clear and Restart</button>
+
+      <div id="chatWidget">
+        <button id="chatToggle">AI Chat</button>
+        <div id="chatBox" style="display:none;">
+          <div id="chatMessages">    
+          </div>
+          <input type="text" id="chatInput" placeholder="Type your question...">
+          <button id="sendBtn">Send</button>
+        </div>
+      </div>
+      
+      
+  <script src="js/AiChat.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/app.js"></script>  
+</body>
+</html>

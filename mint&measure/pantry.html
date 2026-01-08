@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Magic Pantry | Mint & Measure</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Dancing+Script:wght@400..700&family=Indie+Flower&family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/styles.css">
+  
+    <link rel="stylesheet" href="css/pantry.css">
+    
+    <script src="js/jquery.js" defer></script>
+    <script src="js/app.js" defer></script>
+    <script src="js/aiChat.js" defer></script>
+    
+    <script src="js/pantry.js" defer></script>
+    
+  </head>
+  <body>
+    
+    <div id="grid">
+ 
+    <div id="hamburgerBox" onclick="toggleMenu()">
+        <img src="assets/images/mintHamburger.png" alt="Menu">
+    </div> 
+
+    <nav class="navMenu">
+      <a href="index.html" title="home" onclick="closeNav()">Home</a>
+      <a href="about.html" title="about" onclick="closeNav()">About</a>
+      <a href="recipes.html" title="recipes" onclick="closeNav()">Recipes</a>
+      <a href="converter.html" title="chefConverter" onclick="closeNav()">Chef's iConverter</a>
+      <a href="mintscaler.html" title="mintScaler" onclick="closeNav()">Mint Scaler</a>
+      <a href="pantry.html" title="magicPantry" onclick="closeNav()">Magic Pantry</a>
+    </nav>
+    
+    <header>
+      <div class="logoDiv">
+        <a href="index.html">
+          <img src="assets/images/logo.png" alt="Mint & Measure Logo" class="logoImg"/>
+        </a>
+      </div>
+
+      <div class="cookbookIconDiv">
+        <a href="recipes.html?view=cookbook">
+          <img src="assets/images/cookbook1.png" alt="cookbook" class="cookbookIcon">
+        </a>
+      </div>
+
+      <div class="socialDiv">
+        <a href="https://www.facebook.com">
+          <img src="assets/images/facebook.png" alt="facebook" class="socialImg"/>
+        </a>
+        <a href="https://linkedin.com">
+          <img src="assets/images/linkedin.png" alt="linkedin" class="socialImg"/>
+        </a>
+        <a href="https://twitter.com">
+          <img src="assets/images/twitter.png" alt="twitter" class="socialImg"/>
+        </a>
+        <a href="https://instagram.com">
+          <img src="assets/images/instagram.png" alt="instagram" class="socialImg"/>
+        </a>
+      </div>
+
+      <div class="headerContent">
+        <h1>The Magic Pantry</h1>
+        <p class="slogan">"Turn Ingredients into Inspiration"</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="socialHamburgerBox" onclick="toggleSocialMenu()">
+        <div class="socialHamburgerImgBox">
+          <img src="assets/images/socialHamburger.png" alt="social Menu">
+        </div>
+      </div>
+       
+      <div class="themeContainer">
+        <button id="themeToggle" aria-label="Toggle theme">
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+            <span class="toggle-icon moon">🌙</span>
+            <span class="toggle-icon sun">☀</span>
+          </span>
+        </button>
+      </div>
+
+      <section id="pantrySection">
+  
+        <div id="pantryCabinet">
+      
+          <div class="pantryFrame">
+          
+            <div class="pantryInterior">
+              
+              <div class="shelf topShelf">
+                  <span class="jar">🫙</span>
+                  <span class="jar">🧂</span>
+                  <span class="jar">🥫</span>
+              </div>
+
+              <div class="shelf middleShelf">
+                  <div class="pantryInputGroup">
+                      <label for="pantryInput">What's inside your fridge?</label>
+                      <input type="text" id="pantryInput" placeholder="e.g. Eggs, Spinach, Cheese">
+                      <button id="pantrySearchBtn">Find Recipes</button>
+                  </div>
+              </div>
+
+              <div class="shelf bottomShelf"></div>
+            </div>
+
+          <div class="pantryDoor leftDoor">
+              <div class="doorKnob"></div>
+              <div class="doorPanel"></div>
+          </div>
+
+          <div class="pantryDoor rightDoor">
+              <div class="doorKnob"></div>
+              <div class="doorPanel"></div>
+          </div>
+
+          </div>      
+      <p class="pantryHint">Tap the doors to open your pantry</p>
+        </div>
+      </section>
+      <div class="resultsPreview" id="pantryResults">
+          </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+          <h3>Mint & Measure</h3>
+          <p>Where precision meets creativity in the kitchen.</p>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="recipes.html">Recipes</a></li>
+            <li><a href="converter.html">Chef's iConverter</a></li>
+            <li><a href="mintscaler.html">Mint Scaler</a></li>
+            <li><a href="pantry.html">Magic Pantry</a></li>
+          </ul>
+        </div>
+        <div class="footer-copy">
+          <p>&copy; 2025 Mint & Measure. All rights reserved.</p>
+        </div>
+        <div class="studio">
+          <h3>Site by</h3>
+          <img src="assets/images/logoStudio.png" alt="Lam Studios" />
+        </div>
+      </footer>
+    </div>
+    
+    <div id="chatWidget">
+      <button id="chatToggle">Chat with AI</button>
+      <div id="chatBox" style="display: none">
+        <div id="chatMessages"></div>
+        <input type="text" id="chatInput" placeholder="Type your question..." />
+        <button id="sendBtn">Send</button>
+      </div>
+    </div>
+<!-- Recipe Modals pop-ups -->
+    <div id="recipeModal" class="modal">
+      <div class="modal-content">
+      <span class="closeBtn">&times;</span>
+    
+    <h2 id="modalTitle">Recipe Title</h2>
+    <img id="modalImage" src="" alt="Recipe Image">
+
+    <div class="modalActions">
+      <button id="modalSaveBtn" class="viewRecipeBtn">&#9825; Add to Cookbook</button>
+      <button id="modalShareBtn" class="iconBtn">&#128279;</button>
+    </div>
+
+    <div class="recipeBody">
+      <div class="ingredientsSection">
+        <h3>Ingredients</h3>
+        <ul id="modalIngredients">
+          </ul>
+      </div>
+
+      <div class="instructionsSection">
+        <h3>Instructions</h3>
+        <p id="modalInstructions">
+          </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>
