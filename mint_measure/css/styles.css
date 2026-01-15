@@ -345,3 +345,123 @@ button:hover,
   background-color: #00000060; /* Darker glass */
   border-color: #ffffff1a;
 }
+
+/* ============= Mobile Response Add-on ============= */
+
+@media (max-width: 768px) {
+  #grid {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow-x: hidden;
+  }
+
+  header {
+    height: auto;
+    min-height: 400px;
+    padding: 60px 20px;
+    background-position: center top;
+  }
+
+  .headerContent h1 {
+    font-size: 3.5em;
+    line-height: 1.1;
+  }
+
+  .headerContent .slogan {
+    font-size: 1.2em;
+    display: inline-block;
+    margin-top: 15px;
+  }
+
+  .logoDiv {
+    width: 70px;
+    height: 70px;
+    top: 20px;
+    left: 20px;
+  }
+
+  .logoDiv img {
+    width: 100px;
+  }
+
+  #hamburgerBox {
+    top: 20px;
+    right: 20px;
+    width: 60px; 
+    height: 60px;
+  }
+  
+  #hamburgerBox img {
+    width: 80px;
+    top: 15px;
+    right: 15px;
+  }
+
+  .socialDiv {
+    display: none;
+  }
+
+  .cookbookIconDiv {
+    display: flex;
+    top: auto;
+    left: auto;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .cookbookIcon {
+    width: 140px;
+    bottom: 10px;
+  }
+
+  main {
+    padding: 20px;
+    padding-top: 40px;
+  }
+
+  .searchBox {
+    width: 100%;
+    margin: 0 auto 30px auto;
+  }
+
+  select, input {
+    width: 100%;
+    margin-bottom: 15px;
+    margin-right: 0;
+  }
+
+  button {
+    width: 100%;
+    margin: 10px 0 !important;
+  }
+
+  .resultsPreview {
+    padding: 20px;
+    margin-right: 0;
+    gap: 20px;
+  }
+
+  .resultsPreview h3 {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2em;
+  }
+
+  .mealCard {
+    width: 100%;
+  }
+
+  .navMenu {
+    top: -100vh;
+    width: 100%;
+    right: 0;
+    align-items: center;
+    background: rgba(0,0,0,0.9);
+    height: 100vh;
+    justify-content: center;
+    padding-top: 0;
+  }
+}

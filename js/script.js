@@ -1,48 +1,62 @@
-const statusMessage = document.querySelector('.status-message');
+document.addEventListener('DOMContentLoaded', () => {
+  
+  const element = document.querySelector('.status-message');
+  const phrases = [
+    "Front-End Developer",
+    "UI/UX Enthusiast", 
+    "AI Integration",
+    "Code by Lam",
+    "Coming soon to your area...!"
+  ];
 
-const messages = [
-  'Building something great...',
-  'Polishing the pixels...',
-  'Compiling code...',
-  'Launching soon...',
-  'In your area...!',
-  'Code by LAM...',
-];
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typeSpeed = 100;
 
-let currentIndex = 0;
+  function typeEffect() {
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isDeleting) {
+      element.textContent = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+      typeSpeed = 50; 
+    } else {
+      element.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+      typeSpeed = 100;
+    }
 
-function cycleMessages() {
-  statusMessage.classList.add('hidden');
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      isDeleting = true;
+      typeSpeed = 2000; 
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      typeSpeed = 500;
+    }
 
-  setTimeout(() => {
-    currentIndex = (currentIndex + 1) % messages.length;
-    statusMessage.textContent = messages[currentIndex];
-    statusMessage.classList.remove('hidden');
-  }, 500);
-}
+    setTimeout(typeEffect, typeSpeed);
+  }
 
-setInterval(cycleMessages, 3000);
+  typeEffect();
 
-// ===========> Footer and copyright year, auto update. <=============== //
+  const footerTextElement = document.querySelector('.footer-text');
+  const lastUpdatedElement = document.querySelector('.last-updated-date');
+  const currentYear = new Date().getFullYear();
 
-const footerTextElement = document.querySelector('.footer-text');
-const lastUpdatedElement = document.querySelector('.last-updated-date');
-const currentYear = new Date().getFullYear();
+  if (footerTextElement) {
+      footerTextElement.innerHTML = `&copy; ${currentYear} Lam Nguyen. All rights reserved.`;
+  }
 
-// Update the copyright year
-if (footerTextElement) {
-    footerTextElement.innerHTML = `&copy; ${currentYear} Lam Nguyen. All rights reserved.`;
-}
+  const lastModifiedDate = new Date(document.lastModified);
+  const formattedDate = lastModifiedDate.toLocaleDateString('en-CA', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+  });
 
-// Get the last modified date of the file
-const lastModifiedDate = new Date(document.lastModified);
-const formattedDate = lastModifiedDate.toLocaleDateString('en-CA', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  if (lastUpdatedElement) {
+      lastUpdatedElement.textContent = formattedDate;
+  }
 });
-
-// Update the "Last Updated" span
-if (lastUpdatedElement) {
-    lastUpdatedElement.textContent = formattedDate;
-}

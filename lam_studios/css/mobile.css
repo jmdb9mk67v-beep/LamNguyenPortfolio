@@ -1,0 +1,139 @@
+@media (max-width: 768px) {
+  
+  /* GRID RESET */
+  #grid {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* HEADER & NAV */
+  header {
+    height: 50vh;
+    background-position: center;
+  }
+
+  .logo {
+    width: 70px;
+    top: 15px;
+    left: 10px;
+  }
+
+  #hamburger {
+    width: 50px;
+    height: 40px;
+    top: 20px;
+    right: 15px;
+  }
+
+  .bar {
+    width: 50px;
+    height: 6px;
+    margin: 4px 0;
+  }
+
+  #socialBox {
+    top: 90px;
+    left: 10px;
+  }
+
+  /* HOME SECTION */
+  #welcomeBox {
+    padding: 20px 10px;
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  #home {
+    padding: 20px 15px;
+    min-height: auto;
+  }
+
+  #home > h1 {
+    font-size: 2em;
+  }
+
+  .welcomeImg {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  #homeBot {
+    grid-template-columns: 1fr;
+    padding: 20px 15px;
+    gap: 30px;
+  }
+
+  .homeBot-img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ABOUT SECTION */
+  #about {
+    grid-template-columns: 1fr;
+    padding: 40px 20px;
+    min-height: auto;
+    gap: 30px;
+  }
+
+  .aboutImg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* TEMPLATES SECTION */
+  #tempHeading {
+    padding: 20px;
+  }
+  
+  #templates {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .tempImg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* CONTACT SECTION */
+  #contact {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding: 20px;
+    padding-bottom: 60px;
+  }
+
+  .contact-form {
+    padding: 30px 15px;
+    margin: 0;
+    width: 100%;
+  }
+
+  /* SERVICES SECTION (Fixing Floats) */
+  #services {
+    height: auto;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .serviceLeft, .serviceRight {
+    float: none;
+    width: 100%;
+    min-height: auto;
+    padding: 30px 20px;
+  }
+
+  /* CHAT WIDGET MOBILE */
+  #chatBox {
+    width: 90%;
+    height: 50vh;
+    right: 5%;
+    bottom: 80px;
+  }
+}

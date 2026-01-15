@@ -22,17 +22,23 @@ body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--bg-color);
-  /* Optional: Add a mesh gradient background here so the glass has something to blur */
+  background-color: #000;
   background-image: 
-    radial-gradient (circle at 15% 50%, #2997ff26, transparent 25%),
-    radial-gradient (circle at 85% 30%, #6432ff1a, transparent 25%);
-  color: var(--text-color);
+    radial-gradient(circle at center, transparent 30%, #000 90%),
+    linear-gradient(#222 1px, transparent 1px),
+    linear-gradient(90deg, #222 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  background-attachment: fixed;
+  color: #fff;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  
+  /* CHANGED THIS TO 1 TO SHOW CONTENT */
+  opacity: 1; 
+  transition: opacity 0.4s ease-in-out;
 }
 
 /* --- Layout --- */
@@ -53,8 +59,6 @@ body {
   margin: auto;
 }
 
-/* --- Typography & Branding --- */
-
 .brand-name {
   font-size: 3.5rem;
   font-weight: 700;
@@ -72,6 +76,21 @@ body {
   transition: opacity 0.5s ease;
   opacity: 1;
   font-weight: 400;
+  min-height: 1.5em;
+  position: relative;
+  display: inline-block;
+}
+
+.status-message::after {
+  content: '|';
+  margin-left: 5px;
+  color: #f702c6;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .status-message.hidden {
@@ -93,6 +112,7 @@ body {
     inset 0 0 0 1px rgba(255, 255, 255, 0.05); /* Inner rim */
   margin: 2rem auto;
   transition: transform 0.3s ease;
+  width: 25%;
 }
 
 .projects-header {
@@ -107,6 +127,10 @@ body {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.project-desc {
+  font-size: 1.2rem;
 }
 
 /* --- Liquid Project Items --- */
@@ -164,11 +188,13 @@ body {
   width: 100%;
   max-width: 240px;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #ffffff1a;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
   border-radius: 10px;
+  background-color: #f702c6;
+  box-shadow: 0 0 10px #f702c6, 0 0 20px #f702c640;
 }
 
 .loading-indicator::after {
@@ -211,7 +237,7 @@ footer {
 }
 
 .studio-div > img {
-  width: 80px; /* Smaller, cleaner logo sizing */
+  width: 80px; 
   opacity: 0.8;
   padding-bottom: 1rem;
 }
@@ -224,19 +250,21 @@ footer {
   letter-spacing: 0.05em;
 }
 
-/* --- Mobile Responsiveness --- */
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  object-fit: cover; /* Ensures your face isn't stretched */
+  border-radius: 50%; /* Makes it a circle */
+  border: 3px solid #f702c6; /* Lam Studios Hot Pink */
+  box-shadow: 0 0 20px rgba(247, 2, 198, 0.4); /* The Cyber Glow */
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease;
+}
 
-@media only screen and (max-width: 768px) {
-  .brand-name {
-    font-size: 2.5rem;
-  }
-  
-  .projects-container {
-    padding: 1.5rem;
-    margin: 1rem;
-  }
-  
-  .project-links {
-    flex-direction: column;
-  }
+.profile-pic:hover {
+  transform: scale(1.05); /* Slight zoom when hovered */
+  box-shadow: 0 0 30px rgba(247, 2, 198, 0.6);
 }
