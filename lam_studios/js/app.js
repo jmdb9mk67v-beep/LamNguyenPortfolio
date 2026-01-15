@@ -182,5 +182,63 @@ function showhomeBox(num){
   $('#lightboxImage').attr('src', 'assets/images/homeBot' + num + '.png');
 }
 
+// ================================//
+// ====== CONTACT FORM HANDLING ====//
+// ================================ //
+
+function showMessage(event) {
+    // 1. Stop the page from reloading
+    event.preventDefault();
+
+    const form = document.getElementById('contactForm');
+    const btn = document.getElementById('formBtn');
+    const successMsg = document.getElementById('successMsg');
+    const errorMsg = document.getElementById('errorMsg');
+
+    // 2. Prepare the data
+    const data = new FormData(form);
+
+    // 3. Disable button to prevent double-clicks
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+
+    // 4. Send to Formspree
+    fetch("https://formspree.io/f/mykkzlwk", {
+        method: "POST",
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            // Success!
+            successMsg.style.display = "block";
+            errorMsg.style.display = "none";
+            form.reset(); // Clear the inputs
+            btn.textContent = "Message Sent";
+        } else {
+            // Error from server
+            response.json().then(data => {
+                if (Object.hasOwn(data, 'errors')) {
+                    errorMsg.textContent = data.errors.map(error => error["message"]).join(", ");
+                } else {
+                    errorMsg.textContent = "Oops! There was a problem submitting your form";
+                }
+                errorMsg.style.display = "block";
+                btn.disabled = false;
+                btn.textContent = "Send Message";
+            });
+        }
+    }).catch(error => {
+        // Network error
+        errorMsg.textContent = "Oops! There was a problem submitting your form";
+        errorMsg.style.display = "block";
+        btn.disabled = false;
+        btn.textContent = "Send Message";
+    });
+
+    // Return false to ensure form doesn't reload
+    return false;
+}
 
 
