@@ -1,11 +1,12 @@
-// === AI Chatbox (ChefBot Persona + iPhone Bubbles) ===
+// === AI Chatbox (Sous-Chef Fresh Persona + iPhone Bubbles) ===
 
 // 🔑 Gemini API Configuration
-// API Key removed for GitHub migration.  Re-integration pending.
-const API_KEY = "REMOVED_FOR_SECURITY";
+// We now point to our own local "Secret Agent" file
+const CHAT_ENDPOINT = '/.netlify/functions/fetchAI'; 
 
-// Using your preferred version: 2.5-flash
-const CHAT_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + API_KEY;
+// References
+let chatToggle = document.querySelector('#chatToggle');
+// ... (rest of your references remain the same)
 
 // References
 let chatToggle = document.querySelector('#chatToggle');
@@ -73,7 +74,7 @@ function fetchAIResponse(message) {
   const fullPrompt = chefInstruction + message;
 
   const payload = {
-      contents: [{ parts: [{ text: fullPrompt }] }]
+      prompt: fullPrompt
   };
   
   fetch(CHAT_ENDPOINT, {
