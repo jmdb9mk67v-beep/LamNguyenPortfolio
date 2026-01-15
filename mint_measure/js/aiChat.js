@@ -3,7 +3,7 @@
 // ============================================
 
 // 1. CONFIGURATION (Points to Netlify, NOT Google)
-const CHAT_ENDPOINT = '/.netlify/functions/fetchAI'; 
+const CHAT_ENDPOINT = 'https://reliable-dragon-75ea77.netlify.app/.netlify/functions/fetchAI'; 
 
 // 2. SELECTORS
 // We use const here to prevent them from being overwritten
