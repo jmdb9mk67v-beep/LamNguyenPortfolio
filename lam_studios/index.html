@@ -248,14 +248,18 @@
 
       <div id="chatWidget">
         <button id="chatToggle">AI Chat</button>
-        <div id="chatBox" style="display:none;">
-          <div id="chatMessages">    
+
+        <div id="chatBox" style="display: none;">
+
+         <div id="chatMessages"></div>
+
+          <div id="inputArea">
+            <input type="text" id="chatInput" placeholder="Start chatting...">
+            <button id="sendChat">Send</button>
           </div>
-          <input type="text" id="chatInput" placeholder="Type your question...">
-          <button id="sendBtn">Send</button>
-        </div>
+
       </div>
-      
+</div>
       
   <script src="js/AiChat.js"></script>
   <script src="js/jquery.js"></script>

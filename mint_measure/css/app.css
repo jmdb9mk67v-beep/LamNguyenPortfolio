@@ -943,16 +943,6 @@ body.model-open {
   padding: 10px;
 }
 
-@media (max-width: 600px) {
-  #chatBox {
-    width: 90%;       /* Fits the screen width instead of fixed 300px */
-    height: 30vh;     /* Uses 30% of screen height */
-    margin: 10px auto; /* Centers the box horizontally */
-    right: auto;      /* Resets positioning if it was fixed to the side */
-    left: 5%;         /* Helps with centering if position is absolute/fixed */
-    top:auto; 
-  }
-}
 
 #chatMessages {
   display: flex;
@@ -1642,5 +1632,16 @@ main h1 {
 
   .arrowBox {
     transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 600px) {
+  #chatBox {
+    width: 90%;       /* Fits the screen width instead of fixed 300px */
+    height: 30vh;     /* Uses 30% of screen height */
+    margin: 10px auto; /* Centers the box horizontally */
+    right: auto;      /* Resets positioning if it was fixed to the side */
+    left: 5%;         /* Helps with centering if position is absolute/fixed */
+    top:auto; 
   }
 }

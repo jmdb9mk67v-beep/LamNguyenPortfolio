@@ -4,19 +4,24 @@
 // Points to your secure Netlify "Brain"
 const CHAT_ENDPOINT = 'https://reliable-dragon-75ea77.netlify.app/.netlify/functions/fetchAI'; 
 
-// References (Const prevents accidental overwrites)
+// References (Updated ID to match HTML)
 const chatToggle = document.querySelector('#chatToggle');
 const chatBox = document.querySelector('#chatBox');
 const chatMessages = document.querySelector('#chatMessages');
 const chatInput = document.querySelector('#chatInput');
-const sendBtn = document.querySelector('#sendBtn');
+const sendBtn = document.querySelector('#sendChat'); // CHANGED from #sendBtn
 
 // 1. Toggle Chat Visibility
 if (chatToggle) {
   chatToggle.addEventListener('click', function() {
-    chatBox.style.display = (chatBox.style.display === 'flex') ? 'none' : 'flex';
-    // Auto-focus input for better UX
-    if (chatBox.style.display === 'flex') {
+    // Check if it's currently block (visible) or not
+    const isVisible = chatBox.style.display === 'block';
+    
+    // Toggle between 'none' and 'block'
+    chatBox.style.display = isVisible ? 'none' : 'block';
+    
+    // Auto-focus input when opening
+    if (!isVisible) {
       chatInput.focus();
     }
   });
@@ -38,17 +43,23 @@ function sendMessage() {
   if(message === '') return;
 
   // A. Display User Message
-  const userMsg = document.createElement('div');
-  userMsg.textContent = "You: " + message;
+  const userMsg = document.createElement('p');
+  userMsg.classList.add('user-message');
+  userMsg.textContent = message;
   chatMessages.appendChild(userMsg);
 
   // B. Reset UI
   chatInput.value = '';
-  chatMessages.scrollTop = chatMessages.scrollHeight;
+  
+  // FORCE SCROLL: Tiny delay ensures CSS has applied before scrolling
+  setTimeout(() => {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }, 10);
 
-  // C. Disable Input (prevent spamming while thinking)
+  // C. Disable Input
   chatInput.disabled = true;
   sendBtn.disabled = true;
+  sendBtn.style.backgroundColor = "#ccc";
   
   // D. Call the AI
   fetchAIResponse(message);
@@ -56,11 +67,15 @@ function sendMessage() {
 
 // 4. Fetch Response from Netlify
 function fetchAIResponse(message) {
-  // Create "Typing..." placeholder
-  const aiMsg = document.createElement('div');
-  aiMsg.textContent = "LAMI-1: Compiling response...";
+  const aiMsg = document.createElement('p');
+  aiMsg.classList.add('ai-message');
+  aiMsg.textContent = "...";
   chatMessages.appendChild(aiMsg);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
+  
+  // Scroll to show the "..."
+  setTimeout(() => {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }, 10);
 
   // === 🧠 THE ULTIMATE HYBRID PERSONA ===
   const systemInstruction = `
@@ -86,8 +101,8 @@ function fetchAIResponse(message) {
       
       Key Information to Know:
       - Lam Studios specializes in: HTML5, CSS3, JavaScript, Responsive Design, and UI/UX.
-      - The Founder: Lam Nguyen is a developer based in Forest, Ontario, known for clean code and modern aesthetics.
-      - Contact: If someone wants to hire Lam, tell them to email or use the contact form.
+      - The Founder: Lam Nguyen is a developer based in London, Ontario, known for clean code and modern aesthetics.
+      - Contact: If someone wants to hire or contact Lam, tell them to email or use the contact form.
       
       Instructions:
       - Keep answers short (under 3 sentences if possible).
@@ -102,45 +117,37 @@ function fetchAIResponse(message) {
       User Question: 
   `;
 
-  // Combine instructions with user message
   const fullPrompt = systemInstruction + message;
 
-  // Send "prompt" to Netlify (which expects exactly this key)
-  const payload = {
-      prompt: fullPrompt
-  };
+  const payload = { prompt: fullPrompt };
   
   fetch(CHAT_ENDPOINT, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload) 
     })
     .then(response => response.json()) 
     .then(data => {
       let aiResponseText = "System Error: No response generated.";
-      
-      // Parse Gemini Response
       if (data.candidates && data.candidates.length > 0) {
           aiResponseText = data.candidates[0].content.parts[0].text;
       } else if (data.error) {
-          console.error("API Error:", data.error);
           aiResponseText = "Connection Error: " + data.error.message;
       }
-      
-      // Update UI
-      aiMsg.textContent = "LAMI-1: " + aiResponseText;
+      aiMsg.textContent = aiResponseText;
     })
     .catch(error => {
-      console.error("Network Error:", error);
-      aiMsg.textContent = "LAMI-1: Network unreachable. Please check your connection.";
+      aiMsg.textContent = "Network unreachable.";
     })
     .finally(() => {
-        // Re-enable UI
         chatInput.disabled = false;
         sendBtn.disabled = false;
+        sendBtn.style.backgroundColor = "#ff3366";
         chatInput.focus();
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // CRITICAL FIX: Scroll again after text loads
+        setTimeout(() => {
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 50);
     });
 }
