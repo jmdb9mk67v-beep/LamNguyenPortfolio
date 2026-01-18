@@ -112,7 +112,7 @@ body {
     inset 0 0 0 1px rgba(255, 255, 255, 0.05); /* Inner rim */
   margin: 2rem auto;
   transition: transform 0.3s ease;
-  width: 25%;
+  width: 40%;
 }
 
 .projects-header {
