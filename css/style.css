@@ -3,14 +3,14 @@
 
 :root {
   /* Core Colors */
-  --bg-color: #050505; /* Deep, deep black */
-  --text-color: #f5f5f7; /* Off-white for readability */
-  --accent-color: #2997ff; /* vibrant blue */
+  --bg-color: #050505; 
+  --text-color: #f5f5f7; 
+  --accent-color: #2997ff; 
   --muted-color: #86868b;
   --anchor-color: #fb04e7;
   
   /* Liquid Glass Variables */
-  --glass-surface: #1e1e1e66; /* Dark, translucent base */
+  --glass-surface: #1e1e1e66; 
   --glass-border: #ffffff14; /* Subtle highlight */
   --glass-highlight: #ffffff26; /* Top edge reflection */
   --glass-blur: 20px; /* Heavy blur for depth */
@@ -313,6 +313,8 @@ footer {
   letter-spacing: 0.05em;
 }
 
+/* ======= Profile-Pic ========== */
+
 .profile-pic {
   width: 150px;
   height: 150px;
@@ -330,4 +332,114 @@ footer {
 .profile-pic:hover {
   transform: scale(1.05); /* Slight zoom when hovered */
   box-shadow: 0 0 30px rgba(247, 2, 198, 0.6);
+}
+
+/* ... Previous Tech Container Styles ... */
+
+/* Specific Styling for Apple/WordPress/GitHub to be white */
+.devicon-apple-original,
+.devicon-wordpress-plain,
+.devicon-github-original {
+  color: #fff;
+}
+
+/* =========================================
+   TECH STACK SECTION
+   ========================================= */
+
+.tech-container {
+  /* VISIBILITY FIX: Glassmorphism styles */
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  
+  /* LAYOUT FIX */
+  width: 90%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  box-sizing: border-box;
+}
+
+.section-header {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 2rem 0;
+  color: #fff;
+  text-align: left;
+}
+
+.tech-grid {
+  display: grid;
+  /* GRID FIX: Fluid layout (no media queries needed) */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+/* =========================================
+   TECH ITEM & BADGE STYLING
+   ========================================= */
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  transition: transform 0.3s ease;
+  color: #ccc;
+  
+  /* CRITICAL: Anchors the 'absolute' badge inside this box */
+  position: relative; 
+}
+
+.tech-item:hover {
+  transform: translateY(-5px);
+  color: #fff;
+}
+
+.tech-item i {
+  font-size: 3rem;
+}
+
+/* Specific White Color Overrides */
+.devicon-apple-original,
+.devicon-wordpress-plain,
+.devicon-github-original {
+  color: #fff;
+}
+
+/* --- LOADING BADGE LOGIC --- */
+
+.tech-item.learning {
+  opacity: 0.7; /* Dim future skills slightly */
+}
+
+.loading-badge {
+  position: absolute;
+  top: -10px;    
+  right: -15px; 
+  
+  background-color: #f702c6; /* Hot Pink */
+  color: #fff;
+  font-size: 0.55rem;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  white-space: nowrap; 
+  box-shadow: 0 0 2px #f702c6;
+  z-index: 100;
+  
+  /* Animation */
+  animation: pulse-badge 1.5s infinite;
+}
+
+@keyframes pulse-badge {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
 }
