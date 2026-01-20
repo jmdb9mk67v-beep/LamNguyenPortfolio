@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   
   const element = document.querySelector('.status-message');
+  
+  // Updated phrases to reflect your current triOS student status
   const phrases = [
-    "Front-End Developer",
-    "UI/UX Enthusiast", 
+    "Front-End Web Developer",
+    "UI/UX Designer", 
     "AI Integration",
     "Code by Lam",
-    "Coming soon to your area...!"
+    "Building Digital Experiences"
   ];
 
   let phraseIndex = 0;
@@ -29,11 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!isDeleting && charIndex === currentPhrase.length) {
       isDeleting = true;
-      typeSpeed = 2000; 
+      typeSpeed = 2000; // Pause at end of phrase
     } else if (isDeleting && charIndex === 0) {
       isDeleting = false;
       phraseIndex = (phraseIndex + 1) % phrases.length;
-      typeSpeed = 500;
+      typeSpeed = 500; // Pause before typing next
     }
 
     setTimeout(typeEffect, typeSpeed);
@@ -41,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   typeEffect();
 
+  // Footer Date Logic
   const footerTextElement = document.querySelector('.footer-text');
   const lastUpdatedElement = document.querySelector('.last-updated-date');
   const currentYear = new Date().getFullYear();
@@ -49,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
       footerTextElement.innerHTML = `&copy; ${currentYear} Lam Nguyen. All rights reserved.`;
   }
 
+  // Last Updated Logic
   const lastModifiedDate = new Date(document.lastModified);
   const formattedDate = lastModifiedDate.toLocaleDateString('en-CA', {
       year: 'numeric',
