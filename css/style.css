@@ -355,7 +355,6 @@ footer {
   border: 1px solid var(--glass-border);
   border-radius: var(--glass-radius);
   
-  /* LAYOUT FIX */
   width: 90%;
   max-width: 1000px;
   margin: 2rem auto;
@@ -444,3 +443,27 @@ footer {
   100% { transform: scale(1); opacity: 1; }
 }
 
+/* =======> Social Media Section <========= */
+
+.social-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-link i {
+  font-size: 2rem;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-link:hover i {
+  transform: translateY(-5px);
+  color: #ccc;
+}
+
+.social-link i {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
