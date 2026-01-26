@@ -299,10 +299,20 @@ footer {
   color: #fff;
 }
 
-.studio-div > img {
-  width: 80px; 
-  opacity: 0.8;
-  padding-bottom: 1rem;
+
+.studio-div img {
+  width: clamp(60px, 10vw, 100px); /* Fluid sizing for industry standards */
+  height: auto;
+  filter: grayscale(100%); /* Keeps it subtle and professional by default */
+  opacity: 0.6;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth, high-end feel */
+  cursor: pointer;
+}
+
+.studio-div img:hover {
+  filter: grayscale(0%); /* Brings the neon colors back to life */
+  opacity: 1;
+  transform: scale(1.1) rotate(3deg); /* Subtle growth and "pop" */
 }
 
 .last-updated-text {
