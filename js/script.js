@@ -64,3 +64,19 @@ document.addEventListener('DOMContentLoaded', () => {
       lastUpdatedElement.textContent = formattedDate;
   }
 });
+
+// Interactive background <========== //
+document.addEventListener('mousemove', (e) => {
+  const moveX = (e.clientX / window.innerWidth) * 20;
+  const moveY = (e.clientY / window.innerHeight) * 20;
+  document.body.style.backgroundPosition = `0% 0%, ${moveX}px ${moveY}px, ${moveX}px ${moveY}px`;
+});
+
+document.addEventListener('mousemove', (e) => {
+  // We calculate a small offset (dividing by 50 keeps it subtle)
+  const x = e.clientX / 50;
+  const y = e.clientY / 50;
+  
+  document.body.style.setProperty('--mouse-offset-x', `${x}px`);
+  document.body.style.setProperty('--mouse-offset-y', `${y}px`);
+});

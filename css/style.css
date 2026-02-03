@@ -35,11 +35,49 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  
-  /* CHANGED THIS TO 1 TO SHOW CONTENT */
   opacity: 1; 
   transition: opacity 0.4s ease-in-out;
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  min-height: 100vh;
+  color: var(--text-color);
+  line-height: 1.5;
+  webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  --mouse-offset-x: 0px;
+  --mouse--offset-y: 0px;
+  
+  /* Link the animation */
+  animation: grid-flow 12s linear infinite;
 }
+
+/* The Magic: Moving the grid lines */
+@keyframes flux {
+  from {background-position: 0% 0%, 0 0, 0 0;}
+  to {background-position: 0% 0%, 40px 40px, 40px 40px;}
+}
+
+@keyframes grid-flow {
+  from {background-position: 0 0, 0 0, 0 0;}
+  to {background-position: 0 0, 40px 40px, 40px 40px;}
+}
+
+@keyframes grid-flow {
+  from {
+    /* Combine the constant flow with the mouse offset variable */
+    background-position: 
+      0 0, 
+      var(--mouse-offset-x) var(--mouse-offset-y), 
+      var(--mouse-offset-x) var(--mouse-offset-y);
+  }
+  to {
+    /* Add 40px to the variables to maintain the seamless loop */
+    background-position: 
+      0 0, 
+      calc(var(--mouse-offset-x) + 40px) calc(var(--mouse-offset-y) + 40px), 
+      calc(var(--mouse-offset-x) + 40px) calc(var(--mouse-offset-y) + 40px);
+  }
+}
+
 
 /* --- Layout --- */
 
