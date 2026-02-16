@@ -170,7 +170,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 1.5rem;
-  text-align: left; /* Easier to read descriptions */
+  text-align: left; 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -185,7 +185,7 @@ body {
 
 .project-card h3 {
   margin-top: 0;
-  color: var(--accent-color); /* Your blue */
+  color: var(--accent-color); 
   font-size: 1.4rem;
 }
 
@@ -321,7 +321,7 @@ body {
 footer {
   width: 100%;
   padding: 1rem 0;
-  background: #000000cc;
+  background: #1a1a1a;
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--glass-border);
 }
@@ -337,18 +337,17 @@ footer {
   color: #fff;
 }
 
-
 .studio-div img {
-  width: clamp(60px, 10vw, 100px); /* Fluid sizing for industry standards */
+  width: clamp(60px, 10vw, 100px); 
   height: auto;
-  filter: grayscale(100%); /* Keeps it subtle and professional by default */
+  filter: grayscale(100%);
   opacity: 0.6;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth, high-end feel */
   cursor: pointer;
 }
 
 .studio-div img:hover {
-  filter: grayscale(0%); /* Brings the neon colors back to life */
+  filter: grayscale(0%); 
   opacity: 1;
   transform: scale(1.1) rotate(3deg); /* Subtle growth and "pop" */
 }
@@ -360,6 +359,50 @@ footer {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+/* ===========> Weather Widget <============== */
+
+.weather-widget {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  font-size: clamp(0.875rem, 1.5vw, 1.1rem);
+  margin-left: 0;
+  margin-top: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.weather-icon {
+  width: clamp(30px, 5vw, 50px);
+  height: auto;
+}
+
+/* =======> Social Media Section <========= */
+
+.social-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-link i {
+  font-size: 2rem;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-link:hover i {
+  transform: translateY(-5px);
+  color: #ccc;
+}
+
+.social-link i {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
+
 
 /* ======= Profile-Pic ========== */
 
@@ -491,27 +534,4 @@ footer {
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* =======> Social Media Section <========= */
 
-.social-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-.social-link i {
-  font-size: 2rem;
-  color: #fff;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.social-link:hover i {
-  transform: translateY(-5px);
-  color: #ccc;
-}
-
-.social-link i {
-  font-size: clamp(1.5rem, 5vw, 2rem);
-}

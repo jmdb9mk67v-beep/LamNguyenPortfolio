@@ -80,3 +80,39 @@ document.addEventListener('mousemove', (e) => {
   document.body.style.setProperty('--mouse-offset-x', `${x}px`);
   document.body.style.setProperty('--mouse-offset-y', `${y}px`);
 });
+
+// ========> Weather Widget <======== //
+
+const weatherLocation = document.querySelector('.weather-location');
+const weatherTemp = document.querySelector('.weather-temp');
+const weatherIcon = document.querySelector('.weather-icon');
+
+const apiKey = '65e9f666ba5fd022a40fb6c5f9255426';
+const city = 'LONDON,Ontario';
+
+async function getLocalWeather() {
+  try {
+    // Note: &units=metric is used for Celsius
+    const response = await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+    
+    if (!response.ok) throw new Error('Weather data unavailable');
+
+    const data = await response.json();
+    displayWeather(data);
+  } catch (error) {
+    console.error('Error:', error);
+    weatherLocation.textContent = 'Weather Unavailable';
+  }
+}
+
+function displayWeather(data) {
+  const temperature = Math.round(data.main.temp);
+  const iconCode = data.weather[0].icon;
+
+  weatherLocation.textContent = data.name;
+  weatherTemp.textContent = `${temperature}°C`;
+  weatherIcon.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+  weatherIcon.style.display = 'block';
+}
+
+getLocalWeather();
