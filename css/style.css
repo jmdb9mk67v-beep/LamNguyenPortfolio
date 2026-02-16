@@ -360,23 +360,6 @@ footer {
   letter-spacing: 0.05em;
 }
 
-/* ===========> Weather Widget <============== */
-
-.weather-widget {
-  display: flex;
-  align-items: center;
-  gap: clamp(0.5rem, 2vw, 1rem);
-  font-size: clamp(0.875rem, 1.5vw, 1.1rem);
-  margin-left: 0;
-  margin-top: 1rem;
-  width: 100%;
-  justify-content: center;
-}
-
-.weather-icon {
-  width: clamp(30px, 5vw, 50px);
-  height: auto;
-}
 
 /* =======> Social Media Section <========= */
 
