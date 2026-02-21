@@ -33,6 +33,7 @@ Platforms: WordPress, GitHub Pages, Netlify
 Environment: macOS, VS Code, Git
 
 📬 Connect with Me
+
 Portfolio: lamnguyen.ca
 
 Location: Forest, Ontario
