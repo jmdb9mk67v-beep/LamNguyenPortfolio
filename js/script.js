@@ -2,82 +2,81 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const element = document.querySelector('.status-message');
   
-  // Updated phrases to reflect your current triOS student status
-  const phrases = [
-    "Front-End Web Developer",
-    "UI/UX Designer", 
-    "AI Integration",
-    "Code by Lam",
-    "Building Digital Experiences"
-  ];
+  if (element) {
+    const phrases = [
+      "Front-End Web Developer",
+      "UI/UX Designer", 
+      "AI Integration",
+      "Code by Lam",
+      "Building Digital Experiences"
+    ];
 
-  let phraseIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  let typeSpeed = 100;
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 100;
 
-  function typeEffect() {
-    const currentPhrase = phrases[phraseIndex];
-    
-    if (isDeleting) {
-      element.textContent = currentPhrase.substring(0, charIndex - 1);
-      charIndex--;
-      typeSpeed = 50; 
-    } else {
-      element.textContent = currentPhrase.substring(0, charIndex + 1);
-      charIndex++;
-      typeSpeed = 100;
+    function typeEffect() {
+      const currentPhrase = phrases[phraseIndex];
+      
+      if (isDeleting) {
+        element.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 50; 
+      } else {
+        element.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 100;
+      }
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        isDeleting = true;
+        typeSpeed = 2000; 
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 500; 
+      }
+
+      setTimeout(typeEffect, typeSpeed);
     }
 
-    if (!isDeleting && charIndex === currentPhrase.length) {
-      isDeleting = true;
-      typeSpeed = 2000; // Pause at end of phrase
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      typeSpeed = 500; // Pause before typing next
-    }
-
-    setTimeout(typeEffect, typeSpeed);
+    typeEffect();
   }
 
-  typeEffect();
-
-  // Footer Date Logic
   const footerTextElement = document.querySelector('.footer-text');
   const lastUpdatedElement = document.querySelector('.last-updated-date');
-  const currentYear = new Date().getFullYear();
 
   if (footerTextElement) {
-      footerTextElement.innerHTML = `&copy; ${currentYear} Lam Nguyen. All rights reserved.`;
+      footerTextElement.innerHTML = `&copy; ${new Date().getFullYear()} Lam Nguyen. All rights reserved.`;
   }
-
-  // Last Updated Logic
-  const lastModifiedDate = new Date(document.lastModified);
-  const formattedDate = lastModifiedDate.toLocaleDateString('en-CA', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-  });
 
   if (lastUpdatedElement) {
-      lastUpdatedElement.textContent = formattedDate;
+      lastUpdatedElement.textContent = new Date(document.lastModified).toLocaleDateString('en-CA', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+      });
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    document.body.style.setProperty('--mouse-offset-x', `${e.clientX / 50}px`);
+    document.body.style.setProperty('--mouse-offset-y', `${e.clientY / 50}px`);
+  });
+
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  if (tabButtons.length > 0 && tabContents.length > 0) {
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        button.classList.add('active');
+        const targetId = button.getAttribute('data-target');
+        document.querySelector(`#${targetId}`).classList.add('active');
+      });
+    });
   }
 });
-
-// Interactive background <========== //
-document.addEventListener('mousemove', (e) => {
-  const moveX = (e.clientX / window.innerWidth) * 20;
-  const moveY = (e.clientY / window.innerHeight) * 20;
-  document.body.style.backgroundPosition = `0% 0%, ${moveX}px ${moveY}px, ${moveX}px ${moveY}px`;
-});
-
-document.addEventListener('mousemove', (e) => {
-  // We calculate a small offset (dividing by 50 keeps it subtle)
-  const x = e.clientX / 50;
-  const y = e.clientY / 50;
-  
-  document.body.style.setProperty('--mouse-offset-x', `${x}px`);
-  document.body.style.setProperty('--mouse-offset-y', `${y}px`);
-});
-
