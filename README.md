@@ -1,39 +1,47 @@
-Lam Nguyen | Front-End Developer
-Founder of LAM Studios
-Welcome to my GitHub! I am a Web Development student at Trios College (Sept 2025 - July 2026) 
-currently specializing in front-end architecture, UI/UX design, and modern fluid layouts.
+# Lam Nguyen | Front-End Developer 🚀
+**Founder of LAM Studios** *Specializing in High-Performance Front-End Architecture & Fluid UI/UX Design*
 
-🚀 Featured Projects
-Mint & Measure
-A logic-driven kitchen utility built with JavaScript and modern CSS.
+---
 
-Connects to TheMealDB and Spoonacular APIs for real-time ingredient management.
+### 🎓 Academic Excellence
+- **Current Institution:** triOS College (Web Development Program, 2025 - 2026)
+- **Academic Standing:** 98% Average
+- **Focus:** Modern CSS (Grid/Flexbox), Vanilla JS DOM Manipulation, and API Integration.
 
-Features a custom Gemini-powered AI chat interface.
+---
 
-Utilizes a server-side proxy to ensure API key security.
+### 🛠️ Technical Arsenal
+| Category | Tools & Technologies |
+| :--- | :--- |
+| **Core Dev** | HTML5, Modern CSS (Fluid Layouts, `clamp()`), JavaScript (ES6+) |
+| **Design** | Figma (Prototyping), Adobe Suite (Photoshop, Illustrator) |
+| **Workflow** | macOS, VS Code, Git/GitHub, Netlify |
+| **CMS** | WordPress FSE & Custom Block Templates |
 
-Lam Studios Portfolio
-My professional sandbox exploring high-performance assets and advanced DOM manipulation.
+---
 
-Built using professional modern industry standards (CSS Grid, Flexbox, and clamp()).
+### 🚀 Featured Works
 
-100% Responsive design optimized for both macOS and iOS devices.
+#### [Mint & Measure](https://lamnguyen.ca/mint_measure)
+*Logic-driven kitchen utility featuring high-performance unit conversion.*
+- **Security:** Implemented a server-side proxy to protect API keys.
+- **AI Integration:** Features a custom Gemini-powered chat interface.
+- **Connectivity:** Real-time data via TheMealDB and Spoonacular APIs.
 
-Raise Your Vibration
-A wellness platform assignment developed using WordPress FSE and custom block templates.
+#### [Heartland Harmony](https://lamnguyen.ca/heartland_harmony)
+*A premier country music festival showcase.*
+- **Dual Prototype:** Features both Web and App interactive Figma prototypes.
+- **Engineering:** Built with a custom 3D-tilt engine and local grid-fade depth layering.
 
-🛠️ Technologies & Tools
-Languages: HTML5, CSS3 (Modern Fluid Design), JavaScript (ES6+)
+#### [Raise Your Vibration](https://raiseyourvibration5.wordpress.com)
+*Spiritual wellness platform focused on high-frequency content.*
+- Developed using WordPress Full Site Editing (FSE) and custom modular blocks.
 
-Design: Figma, Adobe Photoshop, Illustrator, XD
+---
 
-Platforms: WordPress, GitHub Pages, Netlify
+### 📬 Let's Connect
+- **Portfolio:** [lamnguyen.ca](https://lamnguyen.ca)
+- **Location:** Forest, Ontario
+- **Objective:** Seeking front-end internship opportunities to apply professional modern industry standards.
 
-Environment: macOS, VS Code, Git
-
-📬 Connect with Me
-
-Portfolio: lamnguyen.ca
-
-Location: Forest, Ontario
+*"Expensive, mature, and highly engineered."*
