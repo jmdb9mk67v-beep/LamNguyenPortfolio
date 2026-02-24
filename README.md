@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="assets/images/gitHubHeaderPic.png" alt="LAM Studios Header" width="100%">
+</div>
+
 # Lam Nguyen | Front-End Developer 🚀
 **Founder of LAM Studios** *Specializing in High-Performance Front-End Architecture & Fluid UI/UX Design*
 
