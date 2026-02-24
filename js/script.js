@@ -79,4 +79,28 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  const projectCards = document.querySelectorAll('.project-card');
+
+  if (projectCards.length > 0) {
+    projectCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        card.style.setProperty('--px', `${(x / rect.width) * 100}%`);
+        card.style.setProperty('--py', `${(y / rect.height) * 100}%`);
+        card.style.setProperty('--rx', `${(0.5 - (y / rect.height)) * 8}deg`);
+        card.style.setProperty('--ry', `${((x / rect.width) - 0.5) * 8}deg`);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--px', '50%');
+        card.style.setProperty('--py', '50%');
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
+    });
+  }
 });
