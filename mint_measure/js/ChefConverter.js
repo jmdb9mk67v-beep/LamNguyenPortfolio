@@ -110,10 +110,13 @@ class ChefConverter {
 
 // Instantiate the class to start the functionality when the DOM is fully loaded.
 document.addEventListener('DOMContentLoaded', () => {
-    // FIX 1: Using a camelCase variable name (chefConverter) to create the instance.
-    const chefConverter = new ChefConverter();
+    // SAFETY CHECK: Only run if the converter input is on the page
+    if (document.querySelector('#amountInput')) {
+        const chefConverter = new ChefConverter();
+    }
 });
 
+// Avoid global variables if they aren't used, but if you need them:
 const converterDiv = document.querySelector(".converterDiv");
 const instructionsDiv = document.querySelector(".instructionsDiv");
 const allSteps = document.querySelectorAll(".stepText");

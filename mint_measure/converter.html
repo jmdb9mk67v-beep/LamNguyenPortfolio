@@ -73,10 +73,9 @@
     </div>
 
          <!-- TOGGLE LIGHT/DARK -->
-      <div class="themeContainer" onclick="toggleTheme()" id="themeToggle" aria-label="Toggle theme">
+      <div class="themeContainer" id="themeToggle" aria-label="Toggle theme">
             <span class="toggle-track">
               <span class="toggle-thumb"></span>
-              <!-- Lucy/Sam's SVG work -->
               <svg class="toggle-icon moon" viewBox="0 0 24 24">
                 <path d="M15 12a6 6 0 1 1-6-6 5 5 0 0 0 6 6z"/>
               </svg>
@@ -84,7 +83,6 @@
                 <circle cx="12" cy="12" r="5" />
               </svg>
             </span>
-          </button>
       </div>
       
    <div id="grid">
@@ -98,20 +96,15 @@
           <p class="stepText">3. choose the target unit to see the result.</p>
        </div>
       
-
       <div id="unitConversionSection">
-       
-        
             <h2>iConverter</h2>
     
             <div class="converterBoxLeft"> 
-        
             <label for="amountInput">Amount to Convert:</label>
             <input type="number" id="amountInput" value="1">
          
               <div class="unitGroup">
                 <label>Convert FROM:</label>
-                
                   <div id="unitFromContainer" class="buttonContainer">
                     <button class="unitButton active" data-unit="cup">Cup</button>
                     <button class="unitButton" data-unit="milliliter">mL</button>
@@ -121,7 +114,7 @@
                     <button class="unitButton" data-unit="pound">lb</button>
                   </div>
               </div>
-<br>
+            <br>
             <div class="unitGroup">
             <label>Convert TO:</label>
               <div id="unitToContainer" class="buttonContainer">
@@ -137,9 +130,9 @@
             <p class="resultText">
                 Result: <span id="resultOutput"></span>
             </p>
-            </div>
-          </main>
-      </div>
+            </div> </div> </main>
+
+
        
         
         <footer>
