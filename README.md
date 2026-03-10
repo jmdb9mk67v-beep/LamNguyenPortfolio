@@ -3,7 +3,7 @@
 </div>
 
 # Lam Nguyen | Web Developer 🚀
-**Founder of LAM Studios** *Specializing in High-Performance Front-End Architecture & Fluid UI/UX Design*
+**Founder of LAM Studios** *Specializing in High-Performance Web Architecture & Fluid UI/UX Design*
 
 ---
 
