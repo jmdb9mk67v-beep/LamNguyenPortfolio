@@ -56,13 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Background Grid Flow driven by global mouse position
-    document.addEventListener('mousemove', (e) => {
-        document.body.style.setProperty('--mouse-offset-x', `${e.clientX / 50}px`);
-        document.body.style.setProperty('--mouse-offset-y', `${e.clientY / 50}px`);
-    });
+  
 
-    // --- 5. TAB SYSTEM (Figma Prototypes) ---
+    // --- 5. TAB SYSTEM ---
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
     if (tabButtons.length > 0) {
