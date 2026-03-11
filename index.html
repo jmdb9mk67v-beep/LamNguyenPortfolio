@@ -135,10 +135,38 @@
           <i class="devicon-swift-plain colored"></i>
           <span>Swift</span>
           <div class="loading-badge">Loading...</div>
-        </div>
-
+        </div> 
       </div>
     </section>
+
+      <section class="contact-container" aria-labelledby="contact-header">
+            <h2 id="contact-header" class="section-header">Initiate Contact</h2>
+
+            <form id="contact-form" class="glass-form" action="https://formspree.io/f/mykkzlwk" method="POST">
+              
+              <div class="form-group">
+                <label for="name" class="visually-hidden">Name</label>
+                <input type="text" id="name" name="name" required placeholder="Name" class="glass-input">
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="visually-hidden">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Email Address" class="glass-input">
+              </div>
+        
+              <div class="form-group">
+                <label for="message" class="visually-hidden">Message</label>
+                <textarea id="message" name="message" rows="4" required placeholder="Project details or internship inquiries..." class="glass-input"></textarea>
+              </div>
+
+              <button type="submit" class="btn-visit form-submit-btn">
+                <span>Transmit Message</span>
+              </button>
+
+              <div id="form-status" class="form-status" aria-live="polite"></div>
+            </form>
+            </section>
+
   </main>
 
   <footer>
@@ -160,7 +188,33 @@
     </div>
   </footer>
 
-<script src="js/script.js" defer></script>
+    <aside class="ai-widget-container" aria-label="AI Resume Assistant">
+      
+      <button id="ai-toggle-btn" class="ai-toggle-btn" aria-expanded="false" aria-controls="ai-chat-window">
+        <svg viewBox="0 0 24 24" class="ai-sparkle-icon" aria-hidden="true">
+          <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+        </svg>
+      </button>
+    
+    <div id="ai-chat-window" class="ai-chat-window" aria-hidden="true">
+      <div class="ai-chat-header">
+        <h3>AI Integration Engine</h3>
+        <button id="ai-close-btn" aria-label="Close Chat">&times;</button>
+      </div>
+      
+      <div id="ai-chat-messages" class="ai-chat-messages" role="log" aria-live="polite">
+        <div class="msg ai-msg">System initialized. I am Lam's AI agent. Query his technical stack, 98% academic record, or application readiness.</div>
+      </div>
+      
+      <form id="ai-chat-form" class="ai-chat-input-area">
+        <input type="text" id="ai-user-input" placeholder="Ask about Lam's qualifications..." autocomplete="off" required>
+        <button type="submit" class="ai-submit-btn" aria-label="Send query">&#8593;</button>
+      </form>
+    </div>
+  </aside>
+
+  <script src="js/script.js" defer></script>
+  
 </body>
 
 </html>
