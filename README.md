@@ -2,15 +2,15 @@
   <img src="assets/images/gitHubHeaderPic.png" alt="LAM Studios Header" width="100%">
 </div>
 
-# Lam Nguyen | Front-End Developer 🚀
-**Founder of LAM Studios** *Specializing in High-Performance Front-End Architecture & Fluid UI/UX Design*
+# Lam Nguyen | Web Developer 🚀
+**Founder of LAM Studios** *Specializing in High-Performance Web Architecture & Fluid UI/UX Design*
 
 ---
 
 ### 🎓 Academic Excellence
 - **Current Institution:** triOS College (Web Development Program, 2025 - 2026)
 - **Academic Standing:** 98% Average
-- **Focus:** Modern CSS (Grid/Flexbox), Vanilla JS DOM Manipulation, and API Integration.
+- **Focus:** Modern CSS (Grid/Flexbox), Vanilla JS DOM Manipulation, AI-Driven Solutions and API Integration.
 
 ---
 
@@ -46,6 +46,6 @@
 ### 📬 Let's Connect
 - **Portfolio:** [lamnguyen.ca](https://lamnguyen.ca)
 - **Location:** Forest, Ontario
-- **Objective:** Seeking front-end internship opportunities to apply professional modern industry standards.
+- **Objective:** Seeking Web or Application Programmer/Developer internship opportunities to apply professional modern industry standards.
 
 *"Expensive, mature, and highly engineered."*
