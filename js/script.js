@@ -1,273 +1,184 @@
-document.addEventListener('DOMContentLoaded', () => {
-  
-  const element = document.querySelector('.status-message');
-  
-  if (element) {
-    const phrases = [
-      "Web Developer",
-      "AI Integration Engineer",
-      "UI/UX Engineer",
-      "Code by Lam",
-      "Application Programmer",
-      "AI-Driven Solutions",
-      "Building Digital Experiences",
-      "Mobile Web Developer"
-    ];
-
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typeSpeed = 100;
-
-    function typeEffect() {
-      const currentPhrase = phrases[phraseIndex];
-      
-      if (isDeleting) {
-        element.textContent = currentPhrase.substring(0, charIndex - 1);
-        charIndex--;
-        typeSpeed = 50; 
-      } else {
-        element.textContent = currentPhrase.substring(0, charIndex + 1);
-        charIndex++;
-        typeSpeed = 100;
-      }
-
-      if (!isDeleting && charIndex === currentPhrase.length) {
-        isDeleting = true;
-        typeSpeed = 2000; 
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        typeSpeed = 500; 
-      }
-
-      setTimeout(typeEffect, typeSpeed);
-    }
-
-    typeEffect();
-  }
-
-  const footerTextElement = document.querySelector('.footer-text');
-  const lastUpdatedElement = document.querySelector('.last-updated-date');
-
-  if (footerTextElement) {
-      footerTextElement.innerHTML = `&copy; ${new Date().getFullYear()} Lam Nguyen. All rights reserved.`;
-  }
-
-  if (lastUpdatedElement) {
-      lastUpdatedElement.textContent = new Date(document.lastModified).toLocaleDateString('en-CA', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-      });
-  }
-
-  document.addEventListener('mousemove', (e) => {
-    document.body.style.setProperty('--mouse-offset-x', `${e.clientX / 50}px`);
-    document.body.style.setProperty('--mouse-offset-y', `${e.clientY / 50}px`);
-  });
-
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const tabContents = document.querySelectorAll('.tab-content');
-
-  if (tabButtons.length > 0 && tabContents.length > 0) {
-    tabButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        tabContents.forEach(content => content.classList.remove('active'));
-        
-        button.classList.add('active');
-        const targetId = button.getAttribute('data-target');
-        document.querySelector(`#${targetId}`).classList.add('active');
-      });
-    });
-  }
-
-  const projectCards = document.querySelectorAll('.project-card');
-
-  if (projectCards.length > 0) {
-    projectCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        card.style.setProperty('--px', `${(x / rect.width) * 100}%`);
-        card.style.setProperty('--py', `${(y / rect.height) * 100}%`);
-        card.style.setProperty('--rx', `${(0.5 - (y / rect.height)) * 8}deg`);
-        card.style.setProperty('--ry', `${((x / rect.width) - 0.5) * 8}deg`);
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.setProperty('--px', '50%');
-        card.style.setProperty('--py', '50%');
-        card.style.setProperty('--rx', '0deg');
-        card.style.setProperty('--ry', '0deg');
-      });
-    });
-  }
-});
-
-// -----------> Contact Form and AI-Chat <----------------- //
+// ======================================================
+// LAM STUDIOS: CORE ARCHITECTURE & AI INTEGRATION ENGINE
+// ======================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 1. GLOBAL UI ELEMENTS & STATUS ENGINE ---
+    const statusElement = document.querySelector('.status-message');
+    const footerText = document.querySelector('.footer-text');
+    const lastUpdated = document.querySelector('.last-updated-date');
 
-  // --- FORMSPREE AJAX LOGIC ---
-  // I am hijacking the default form submission to send an asynchronous POST request via the Fetch API. 
-  // This prevents page reloads, keeps the user in my fluid UI, and allows me to render a custom success state.
-  const contactForm = document.querySelector('#contact-form');
-  const formStatus = document.querySelector('#form-status');
+    // --- 2. TYPING EFFECT (The "Living" Persona) ---
+    if (statusElement) {
+        const phrases = ["Web Developer", "AI Integration Engineer", "UI/UX Engineer", "Code by Lam", "Application Programmer", "AI-Driven Solutions", "Building Digital Experiences", "Mobile Web Developer"];
+        let phraseIdx = 0, charIdx = 0, isDeleting = false, speed = 100;
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const url = contactForm.getAttribute('action');
-      const formData = new FormData(contactForm);
-      
-      formStatus.textContent = 'Transmitting...';
-      formStatus.style.color = '#fff';
+        const typeEffect = () => {
+            const current = phrases[phraseIdx];
+            statusElement.textContent = isDeleting ? current.substring(0, charIdx - 1) : current.substring(0, charIdx + 1);
+            charIdx = isDeleting ? charIdx - 1 : charIdx + 1;
+            speed = isDeleting ? 50 : 100;
 
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          contactForm.reset();
-          formStatus.textContent = 'Message transmitted successfully. I will be in touch.';
-          formStatus.style.color = '#f702c6';
-        } else {
-          const data = await response.json();
-          if (Object.hasOwn(data, 'errors')) {
-            formStatus.textContent = data.errors.map(error => error.message).join(', ');
-          } else {
-            formStatus.textContent = 'Oops! There was a problem transmitting your form.';
-          }
-          formStatus.style.color = '#f00';
-        }
-      } catch (error) {
-        formStatus.textContent = 'Network error. Please try again later.';
-        formStatus.style.color = '#f00';
-      }
-    });
-  }
-
-  // --- AI CHAT WIDGET UI LOGIC ---
-  // ==========================================
-// PORTFOLIO AI INTEGRATION 
-// ==========================================
-
-// 1. ABSOLUTE ENDPOINT
-// We point directly to the working production function used by your other apps
-const CHAT_ENDPOINT = 'https://reliable-dragon-75ea77.netlify.app/.netlify/functions/fetchAI'; 
-
-// 2. DOM SELECTORS (Mapped to your specific HTML IDs)
-const aiToggleBtn = document.querySelector('#ai-toggle-btn');
-const aiCloseBtn = document.querySelector('#ai-close-btn');
-const aiChatWindow = document.querySelector('#ai-chat-window');
-const aiChatForm = document.querySelector('#ai-chat-form');
-const aiUserInput = document.querySelector('#ai-user-input');
-const aiChatMessages = document.querySelector('#ai-chat-messages');
-const aiSubmitBtn = document.querySelector('.ai-submit-btn');
-
-function scrollToBottom() {
-    if (aiChatMessages) {
-        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
-    }
-}
-
-// 3. UI TOGGLE LOGIC
-if (aiToggleBtn && aiChatWindow) {
-    aiToggleBtn.addEventListener('click', () => {
-        aiChatWindow.classList.add('show-chat');
-        aiToggleBtn.setAttribute('aria-expanded', 'true');
-        aiChatWindow.setAttribute('aria-hidden', 'false');
-        if (aiUserInput) aiUserInput.focus();
-    });
-}
-
-if (aiCloseBtn && aiChatWindow) {
-    aiCloseBtn.addEventListener('click', () => {
-        aiChatWindow.classList.remove('show-chat');
-        aiToggleBtn.setAttribute('aria-expanded', 'false');
-        aiChatWindow.setAttribute('aria-hidden', 'true');
-    });
-}
-
-// 4. CHAT LOGIC
-if (aiChatForm) {
-    aiChatForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const message = aiUserInput.value.trim();
-        if (message === '') return;
-
-        // Render User Message
-        const userMsgDiv = document.createElement('div');
-        userMsgDiv.classList.add('msg', 'user-msg'); 
-        userMsgDiv.textContent = message;
-        aiChatMessages.appendChild(userMsgDiv);
-
-        // UI Reset
-        aiUserInput.value = '';
-        aiUserInput.disabled = true;
-        aiSubmitBtn.disabled = true;
-        scrollToBottom();
-
-        // Render AI Loading State
-        const thinkingDiv = document.createElement('div');
-        thinkingDiv.classList.add('msg', 'ai-msg'); 
-        thinkingDiv.textContent = "...";
-        aiChatMessages.appendChild(thinkingDiv);
-        scrollToBottom();
-
-        // 5. THE PERSONA (Injecting the Portfolio context here)
-        const systemContext = `
-            You are Sam, Lam Nguyen's digital assistant. 
-            Lam is a Web Developer with a 98% academic average. 
-            Keep your answers highly professional, detailed, concise, and positive. 
-            Question the user's logic occasionally if appropriate.
-        `;
-        
-        // We use "prompt" as the key to match what fetchAI.js expects!
-        const payload = { 
-            prompt: systemContext + "\nUser Query: " + message 
+            if (!isDeleting && charIdx === current.length) { isDeleting = true; speed = 2000; }
+            else if (isDeleting && charIdx === 0) { isDeleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; speed = 500; }
+            setTimeout(typeEffect, speed);
         };
+        typeEffect();
+    }
 
-        fetch(CHAT_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload) 
-        })
-        .then(response => response.json()) 
-        .then(data => {
-            let aiResponseText = "System Error: No response generated.";
+    // --- 3. FOOTER & METADATA ---
+    if (footerText) footerText.innerHTML = `&copy; ${new Date().getFullYear()} Lam Nguyen. All rights reserved.`;
+    if (lastUpdated) lastUpdated.textContent = new Date(document.lastModified).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    // --- 4. 3D INTERACTIVE ENGINE (High-Performance Hover Effects) ---
+    // Utilizing 0.35s cubic-bezier and localized cursor tracking for depth layering.
+    const interactiveElements = document.querySelectorAll('.project-card, .ai-chat-window');
+    
+    interactiveElements.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             
-            // Parsing the raw Google response structure
-            if (data.candidates && data.candidates.length > 0) {
-                aiResponseText = data.candidates[0].content.parts[0].text;
-            } else if (data.error) {
-                aiResponseText = "Connection Error: " + data.error.message;
-            }
-            
-            // Format Bold and Linebreaks
-            thinkingDiv.innerHTML = aiResponseText
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
-                .replace(/\n/g, '<br>'); 
-        })
-        .catch(error => {
-            console.error("Fetch Error:", error);
-            thinkingDiv.textContent = "Network unreachable.";
-        })
-        .finally(() => {
-            aiUserInput.disabled = false;
-            aiSubmitBtn.disabled = false;
-            aiUserInput.focus();
-            scrollToBottom();
+            // Driving variables for rotation (max 4deg) and inner light bloom
+            el.style.setProperty('--px', `${(x / rect.width) * 100}%`);
+            el.style.setProperty('--py', `${(y / rect.height) * 100}%`);
+            el.style.setProperty('--rx', `${(0.5 - (y / rect.height)) * 4}deg`);
+            el.style.setProperty('--ry', `${((x / rect.width) - 0.5) * 4}deg`);
+        });
+
+        el.addEventListener('mouseleave', () => {
+            el.style.setProperty('--px', '50%');
+            el.style.setProperty('--py', '50%');
+            el.style.setProperty('--rx', '0deg');
+            el.style.setProperty('--ry', '0deg');
         });
     });
-  }
-  }); // Closes the fetch routine
+
+    // Background Grid Flow driven by global mouse position
+    document.addEventListener('mousemove', (e) => {
+        document.body.style.setProperty('--mouse-offset-x', `${e.clientX / 50}px`);
+        document.body.style.setProperty('--mouse-offset-y', `${e.clientY / 50}px`);
+    });
+
+    // --- 5. TAB SYSTEM (Figma Prototypes) ---
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    if (tabButtons.length > 0) {
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabButtons.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelector(`#${btn.getAttribute('data-target')}`).classList.add('active');
+            });
+        });
+    }
+
+    // --- 6. FORMSPREE PIPELINE (Contact Form) ---
+    const contactForm = document.querySelector('#contact-form');
+    const formStatus = document.querySelector('#form-status');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            formStatus.textContent = 'Transmitting...';
+            try {
+                const response = await fetch(contactForm.getAttribute('action'), {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    contactForm.reset();
+                    formStatus.textContent = 'Message transmitted. Happy coding.';
+                    formStatus.style.color = '#f702c6';
+                } else { throw new Error(); }
+            } catch (err) {
+                formStatus.textContent = 'Transmission failure. Please check connection.';
+                formStatus.style.color = '#f00';
+            }
+        });
+    }
+
+    // --- 7. AI INTEGRATION ENGINE (Sam Digital Assistant) ---
+    const CHAT_ENDPOINT = 'https://reliable-dragon-75ea77.netlify.app/.netlify/functions/fetchAI'; 
+    const aiToggle = document.querySelector('#ai-toggle-btn');
+    const aiClose = document.querySelector('#ai-close-btn');
+    const aiWindow = document.querySelector('#ai-chat-window');
+    const aiForm = document.querySelector('#ai-chat-form');
+    const aiInput = document.querySelector('#ai-user-input');
+    const aiMessages = document.querySelector('#ai-chat-messages');
+    const aiSubmit = document.querySelector('.ai-submit-btn');
+
+    const scrollToBottom = () => { if (aiMessages) aiMessages.scrollTop = aiMessages.scrollHeight; };
+
+    if (aiToggle && aiWindow) {
+        aiToggle.addEventListener('click', () => {
+            aiWindow.classList.add('active'); // Fix: Changed from .show-chat to .active to match CSS
+            aiToggle.setAttribute('aria-expanded', 'true');
+            aiWindow.setAttribute('aria-hidden', 'false');
+            if (aiInput) aiInput.focus();
+        });
+    }
+
+    if (aiClose && aiWindow) {
+        aiClose.addEventListener('click', () => {
+            aiWindow.classList.remove('active');
+            aiToggle.setAttribute('aria-expanded', 'false');
+            aiWindow.setAttribute('aria-hidden', 'true');
+        });
+    }
+
+    if (aiForm) {
+        aiForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const message = aiInput.value.trim();
+            if (message === '') return;
+
+            // Render User Bubble
+            const userMsg = document.createElement('div');
+            userMsg.classList.add('msg', 'user-msg'); 
+            userMsg.textContent = message;
+            aiMessages.appendChild(userMsg);
+
+            // State Reset
+            aiInput.value = '';
+            aiInput.disabled = true;
+            aiSubmit.disabled = true;
+            scrollToBottom();
+
+            // Render AI Loading State
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.classList.add('msg', 'ai-msg'); 
+            thinkingDiv.textContent = "...";
+            aiMessages.appendChild(thinkingDiv);
+            scrollToBottom();
+
+            // Persona & Context
+            const systemContext = `You are Sam, Lam Nguyen's digital assistant. He is a Web Developer with a 98% average. Be detailed, concise, professional, and positive. Question logic if appropriate.`;
+            const payload = { prompt: systemContext + "\nUser Query: " + message };
+
+            fetch(CHAT_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload) 
+            })
+            .then(res => res.json()) 
+            .then(data => {
+                let text = "System Error: Bridge disconnected.";
+                if (data.candidates && data.candidates[0]) text = data.candidates[0].content.parts[0].text;
+                else if (data.error) text = `Error: ${data.error.message}`;
+                
+                thinkingDiv.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>'); 
+            })
+            .catch(() => thinkingDiv.textContent = "Network unreachable.")
+            .finally(() => {
+                aiInput.disabled = false;
+                aiSubmit.disabled = false;
+                aiInput.focus();
+                scrollToBottom();
+            });
+        });
+    }
+});
