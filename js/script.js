@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 7. AI INTEGRATION ENGINE (Sam Digital Assistant) ---
-    const CHAT_ENDPOINT = 'https://reliable-dragon-75ea77.netlify.app/.netlify/functions/fetchAI'; 
+    const CHAT_ENDPOINT = '/api/chat'; 
     const aiToggle = document.querySelector('#ai-toggle-btn');
     const aiClose = document.querySelector('#ai-close-btn');
     const aiWindow = document.querySelector('#ai-chat-window');
@@ -201,6 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+/* I am defining the UI elements so the browser knows what to look for.
+   Make sure these IDs match your index.html exactly! 
+*/
+const aiForm = document.querySelector('#aiForm'); 
+const aiInput = document.querySelector('#aiInput');
+const thinkingDiv = document.querySelector('#thinkingDiv');
 
 /* I am updating the CHAT_ENDPOINT to point to our local 
    Vercel serverless function. 
