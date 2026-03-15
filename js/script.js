@@ -1,245 +1,190 @@
-// ======================================================
-// LAM STUDIOS: CORE ARCHITECTURE & AI INTEGRATION ENGINE
-// ======================================================
+/* ======================================================
+   LAM STUDIOS: CORE ARCHITECTURE & AI INTEGRATION ENGINE
+   ====================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 1. GLOBAL UI ELEMENTS & STATUS ENGINE ---
-    const statusElement = document.querySelector('.status-message');
-    const footerText = document.querySelector('.footer-text');
-    const lastUpdated = document.querySelector('.last-updated-date');
+  
+  /* --- 1. GLOBAL UI ELEMENTS & STATUS ENGINE --- */
+  const statusElement = document.querySelector('.status-message');
+  const footerText = document.querySelector('.footer-text');
+  const lastUpdated = document.querySelector('.last-updated-date');
 
-    // --- 2. TYPING EFFECT (The "Living" Persona) ---
-    if (statusElement) {
-        const phrases = ["Web Developer", "AI Integration Engineer", "UI/UX Engineer", "Code by Lam", "Application Programmer", "AI-Driven Solutions", "Building Digital Experiences", "Mobile Web Developer"];
-        let phraseIdx = 0, charIdx = 0, isDeleting = false, speed = 100;
+  /* --- 2. TYPING EFFECT (The "Living" Persona) --- */
+  if (statusElement) {
+    const phrases = [
+      "Web Developer", "AI Integration Engineer", 
+      "UI/UX Engineer", "Code by Lam", 
+      "Application Programmer", "AI-Driven Solutions", 
+      "Building Digital Experiences", "Mobile Web Developer"
+    ];
+    let phraseIdx = 0, charIdx = 0, isDeleting = false, speed = 100;
 
-        const typeEffect = () => {
-            const current = phrases[phraseIdx];
-            statusElement.textContent = isDeleting ? current.substring(0, charIdx - 1) : current.substring(0, charIdx + 1);
-            charIdx = isDeleting ? charIdx - 1 : charIdx + 1;
-            speed = isDeleting ? 50 : 100;
+    const typeEffect = () => {
+      const current = phrases[phraseIdx];
+      statusElement.textContent = isDeleting 
+        ? current.substring(0, charIdx - 1) 
+        : current.substring(0, charIdx + 1);
+      
+      charIdx = isDeleting ? charIdx - 1 : charIdx + 1;
+      speed = isDeleting ? 50 : 100;
 
-            if (!isDeleting && charIdx === current.length) { isDeleting = true; speed = 2000; }
-            else if (isDeleting && charIdx === 0) { isDeleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; speed = 500; }
-            setTimeout(typeEffect, speed);
-        };
-        typeEffect();
-    }
+      if (!isDeleting && charIdx === current.length) { 
+        isDeleting = true; 
+        speed = 2000; 
+      } else if (isDeleting && charIdx === 0) { 
+        isDeleting = false; 
+        phraseIdx = (phraseIdx + 1) % phrases.length; 
+        speed = 500; 
+      }
+      setTimeout(typeEffect, speed);
+    };
+    typeEffect();
+  }
 
-    // --- 3. FOOTER & METADATA ---
-    if (footerText) footerText.innerHTML = `&copy; ${new Date().getFullYear()} Lam Nguyen. All rights reserved.`;
-    if (lastUpdated) lastUpdated.textContent = new Date(document.lastModified).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+  /* --- 3. FOOTER & METADATA --- */
+  if (footerText) {
+    footerText.innerHTML = `&copy; ${new Date().getFullYear()} Lam Nguyen. All rights reserved.`;
+  }
+  if (lastUpdated) {
+    lastUpdated.textContent = new Date(document.lastModified)
+      .toLocaleDateString('en-CA', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+  }
 
-    // --- 4. 3D INTERACTIVE ENGINE (High-Performance Hover Effects) ---
-    // Utilizing 0.35s cubic-bezier and localized cursor tracking for depth layering.
-    const interactiveElements = document.querySelectorAll('.project-card, .ai-chat-window');
-    
-    interactiveElements.forEach(el => {
-        el.addEventListener('mousemove', (e) => {
-            const rect = el.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            // Driving variables for rotation (max 4deg) and inner light bloom
-            el.style.setProperty('--px', `${(x / rect.width) * 100}%`);
-            el.style.setProperty('--py', `${(y / rect.height) * 100}%`);
-            el.style.setProperty('--rx', `${(0.5 - (y / rect.height)) * 4}deg`);
-            el.style.setProperty('--ry', `${((x / rect.width) - 0.5) * 4}deg`);
-        });
-
-        el.addEventListener('mouseleave', () => {
-            el.style.setProperty('--px', '50%');
-            el.style.setProperty('--py', '50%');
-            el.style.setProperty('--rx', '0deg');
-            el.style.setProperty('--ry', '0deg');
-        });
+  /* --- 4. 3D INTERACTIVE ENGINE --- */
+  const interactiveElements = document.querySelectorAll('.project-card, .ai-chat-window');
+  
+  interactiveElements.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      el.style.setProperty('--px', `${(x / rect.width) * 100}%`);
+      el.style.setProperty('--py', `${(y / rect.height) * 100}%`);
+      el.style.setProperty('--rx', `${(0.5 - (y / rect.height)) * 4}deg`);
+      el.style.setProperty('--ry', `${((x / rect.width) - 0.5) * 4}deg`);
     });
 
-  
+    el.addEventListener('mouseleave', () => {
+      el.style.setProperty('--px', '50%');
+      el.style.setProperty('--py', '50%');
+      el.style.setProperty('--rx', '0deg');
+      el.style.setProperty('--ry', '0deg');
+    });
+  });
 
-    // --- 5. TAB SYSTEM ---
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-    if (tabButtons.length > 0) {
-        tabButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabButtons.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                btn.classList.add('active');
-                document.querySelector(`#${btn.getAttribute('data-target')}`).classList.add('active');
-            });
+  /* --- 5. FORMSPREE PIPELINE --- */
+  const contactForm = document.querySelector('#contact-form');
+  const formStatus = document.querySelector('#form-status');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formStatus.textContent = 'Transmitting...';
+      try {
+        const response = await fetch(contactForm.getAttribute('action'), {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
         });
-    }
+        if (response.ok) {
+          contactForm.reset();
+          formStatus.textContent = 'Message transmitted. Happy coding.';
+          formStatus.style.color = '#f702c6';
+        } else { throw new Error(); }
+      } catch (err) {
+        formStatus.textContent = 'Transmission failure.';
+        formStatus.style.color = '#f00';
+      }
+    });
+  }
 
-    // --- 6. FORMSPREE PIPELINE (Contact Form) ---
-    const contactForm = document.querySelector('#contact-form');
-    const formStatus = document.querySelector('#form-status');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            formStatus.textContent = 'Transmitting...';
-            try {
-                const response = await fetch(contactForm.getAttribute('action'), {
-                    method: 'POST',
-                    body: new FormData(contactForm),
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    contactForm.reset();
-                    formStatus.textContent = 'Message transmitted. Happy coding.';
-                    formStatus.style.color = '#f702c6';
-                } else { throw new Error(); }
-            } catch (err) {
-                formStatus.textContent = 'Transmission failure. Please check connection.';
-                formStatus.style.color = '#f00';
-            }
-        });
-    }
+  /* --- 6. AI INTEGRATION ENGINE (Sam) --- */
+  const CHAT_ENDPOINT = '/api/chat'; 
+  const aiToggle = document.querySelector('#ai-toggle-btn');
+  const aiClose = document.querySelector('#ai-close-btn');
+  const aiWindow = document.querySelector('#ai-chat-window');
+  const aiForm = document.querySelector('#ai-chat-form');
+  const aiInput = document.querySelector('#ai-user-input');
+  const aiMessages = document.querySelector('#ai-chat-messages');
+  const aiSubmit = document.querySelector('.ai-submit-btn');
 
-    // --- 7. AI INTEGRATION ENGINE (Sam Digital Assistant) ---
-    const CHAT_ENDPOINT = '/api/chat'; 
-    const aiToggle = document.querySelector('#ai-toggle-btn');
-    const aiClose = document.querySelector('#ai-close-btn');
-    const aiWindow = document.querySelector('#ai-chat-window');
-    const aiForm = document.querySelector('#ai-chat-form');
-    const aiInput = document.querySelector('#ai-user-input');
-    const aiMessages = document.querySelector('#ai-chat-messages');
-    const aiSubmit = document.querySelector('.ai-submit-btn');
-
-    const scrollToBottom = () => { if (aiMessages) aiMessages.scrollTop = aiMessages.scrollHeight; };
-
-    if (aiToggle && aiWindow) {
-        aiToggle.addEventListener('click', () => {
-            aiWindow.classList.add('active'); // Fix: Changed from .show-chat to .active to match CSS
-            aiToggle.setAttribute('aria-expanded', 'true');
-            aiWindow.setAttribute('aria-hidden', 'false');
-            if (aiInput) aiInput.focus();
-        });
-    }
-
-    if (aiClose && aiWindow) {
-        aiClose.addEventListener('click', () => {
-            aiWindow.classList.remove('active');
-            aiToggle.setAttribute('aria-expanded', 'false');
-            aiWindow.setAttribute('aria-hidden', 'true');
-        });
-    }
-
-    if (aiForm) {
-        aiForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const message = aiInput.value.trim();
-            if (message === '') return;
-
-            // Render User Bubble
-            const userMsg = document.createElement('div');
-            userMsg.classList.add('msg', 'user-msg'); 
-            userMsg.textContent = message;
-            aiMessages.appendChild(userMsg);
-
-            // State Reset
-            aiInput.value = '';
-            aiInput.disabled = true;
-            aiSubmit.disabled = true;
-            scrollToBottom();
-
-            // Render AI Loading State
-            const thinkingDiv = document.createElement('div');
-            thinkingDiv.classList.add('msg', 'ai-msg'); 
-            thinkingDiv.textContent = "...";
-            aiMessages.appendChild(thinkingDiv);
-            scrollToBottom();
-
-            // Persona & Context
-            const systemContext = `
-                You are Sam, Lam Nguyen's digital assistant. 
-             Lam is a Web Developer specializing in Front-End Development with a 98% academic average. 
-
-             Verified Tech Stack:
-             - Languages: HTML5, CSS3, and modern Vanilla JavaScript.
-             - Design & UX: Figma, Adobe Photoshop, and Illustrator.
-             - CMS: WordPress (Full Site Editing & Custom Templates).
-             - Tools: Git, GitHub, VS Code, and Netlify for deployment.
-
-              Current Learning Path (Not yet proficient):
-             - Mobile Development: Java and Swift (Loading...).
-             - Back-End: Just beginning studies (Do NOT claim expertise in MongoDB, SQL, or Node.js yet).
-
-             Guidelines:
-             - Be professional, detailed, concise, and positive. 
-              - Question the user's logic occasionally if appropriate.
-             - Only discuss skills that are currently in the 'Verified Tech Stack'.
-            `;
-
-            // I am ensuring the prompt key is used to match the shared fetchAI.js backend logic
-            const payload = { 
-                prompt: systemContext + "\nUser Query: " + message 
-            };
-
-            fetch(CHAT_ENDPOINT, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload) 
-            })
-            .then(res => res.json()) 
-            .then(data => {
-                let text = "System Error: Bridge disconnected.";
-                if (data.candidates && data.candidates[0]) text = data.candidates[0].content.parts[0].text;
-                else if (data.error) text = `Error: ${data.error.message}`;
-                
-                thinkingDiv.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>'); 
-            })
-            .catch(() => thinkingDiv.textContent = "Network unreachable.")
-            .finally(() => {
-                aiInput.disabled = false;
-                aiSubmit.disabled = false;
-                aiInput.focus();
-                scrollToBottom();
-            });
-        });
-    }
-});
-
-/* I am defining the UI elements so the browser knows what to look for.
-   Make sure these IDs match your index.html exactly! 
-*/
-const aiForm = document.querySelector('#aiForm'); 
-const aiInput = document.querySelector('#aiInput');
-const thinkingDiv = document.querySelector('#thinkingDiv');
-
-/* I am updating the CHAT_ENDPOINT to point to our local 
-   Vercel serverless function. 
-*/
-const CHAT_ENDPOINT = '/api/chat';
-
-aiForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const systemContext = "Only discuss skills in the 'Verified Tech Stack'.";
-  const payload = {
-    prompt: systemContext + "\nUser Query: " + message 
+  const scrollToBottom = () => { 
+    if (aiMessages) aiMessages.scrollTop = aiMessages.scrollHeight; 
   };
 
-  fetch(CHAT_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.json())
-  .then(data => {
-    let text = "System Error: Bridge disconnected.";
-    
-    /* I am parsing the Gemini response structure correctly. */
-    if (data.candidates && data.candidates[0]) {
-      text = data.candidates[0].content.parts[0].text;
-    } else if (data.error) {
-      text = `Error: ${data.error.message}`;
-    }
+  if (aiToggle && aiWindow) {
+    aiToggle.addEventListener('click', () => {
+      aiWindow.classList.add('active');
+      aiToggle.setAttribute('aria-expanded', 'true');
+      aiWindow.setAttribute('aria-hidden', 'false');
+      if (aiInput) aiInput.focus();
+    });
+  }
 
-    /* I am applying your formatting and updating the UI. */
-    thinkingDiv.innerHTML = text
-      .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
-      .replace(/\n/g, '<br>');
-  });
+  if (aiClose && aiWindow) {
+    aiClose.addEventListener('click', () => {
+      aiWindow.classList.remove('active');
+      aiToggle.setAttribute('aria-expanded', 'false');
+      aiWindow.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  if (aiForm) {
+    aiForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const message = aiInput.value.trim();
+      if (message === '') return;
+
+      const userMsg = document.createElement('div');
+      userMsg.classList.add('msg', 'user-msg'); 
+      userMsg.textContent = message;
+      aiMessages.appendChild(userMsg);
+
+      aiInput.value = '';
+      aiInput.disabled = true;
+      aiSubmit.disabled = true;
+      scrollToBottom();
+
+      const thinkingDiv = document.createElement('div');
+      thinkingDiv.classList.add('msg', 'ai-msg'); 
+      thinkingDiv.textContent = "...";
+      aiMessages.appendChild(thinkingDiv);
+      scrollToBottom();
+
+      const systemContext = `You are Sam, Lam's assistant. 
+        Focus on his verified stack: HTML, CSS, JS, Figma, WordPress.`;
+
+      const payload = { 
+        prompt: `${systemContext}\nUser Query: ${message}` 
+      };
+
+      fetch(CHAT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload) 
+      })
+      .then(res => res.json()) 
+      .then(data => {
+        let text = "System Error: Bridge disconnected.";
+        if (data.candidates && data.candidates[0]) {
+          text = data.candidates[0].content.parts[0].text;
+        }
+        
+        thinkingDiv.innerHTML = text
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\n/g, '<br>'); 
+      })
+      .catch(() => thinkingDiv.textContent = "Network unreachable.")
+      .finally(() => {
+        aiInput.disabled = false;
+        aiSubmit.disabled = false;
+        aiInput.focus();
+        scrollToBottom();
+      });
+    });
+  }
 });
