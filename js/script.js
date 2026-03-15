@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
              - Only discuss skills that are currently in the 'Verified Tech Stack'.
             `;
 
-            // I am ensuring the prompt key is used to match your shared fetchAI.js backend logic
+            // I am ensuring the prompt key is used to match the shared fetchAI.js backend logic
             const payload = { 
                 prompt: systemContext + "\nUser Query: " + message 
             };
@@ -199,4 +199,41 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+});
+
+
+/* I am updating the CHAT_ENDPOINT to point to our local 
+   Vercel serverless function. 
+*/
+const CHAT_ENDPOINT = '/api/chat';
+
+aiForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const systemContext = "Only discuss skills in the 'Verified Tech Stack'.";
+  const payload = {
+    prompt: systemContext + "\nUser Query: " + message 
+  };
+
+  fetch(CHAT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+    let text = "System Error: Bridge disconnected.";
+    
+    /* I am parsing the Gemini response structure correctly. */
+    if (data.candidates && data.candidates[0]) {
+      text = data.candidates[0].content.parts[0].text;
+    } else if (data.error) {
+      text = `Error: ${data.error.message}`;
+    }
+
+    /* I am applying your formatting and updating the UI. */
+    thinkingDiv.innerHTML = text
+      .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+  });
 });
