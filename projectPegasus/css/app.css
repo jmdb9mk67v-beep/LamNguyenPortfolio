@@ -1,0 +1,139 @@
+/* Variables using strictly hex values.
+  Established to maintain a mature, high-end 
+  engineering aesthetic.
+*/
+
+:root {
+ --bgMain: #0a0a0a;
+ --bgCard: #141414;
+ --borderSubtle: #222;
+ --textPrimary: #fff;
+ --textSecondary: #888;
+ --accentPulse: #00ff41;
+ --dimOverlay: #000;
+ --transitionMain: 0.35s cubic-bezier(0.22, 1, 0.36, 1); 
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bgMain);
+  color: var(--textPrimary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* App container using Flexbox for vertical alignment.
+  Padding uses clamp() for modern fluidity.
+*/
+#appContainer {
+  display: flex;
+  flex-direction: column;
+  /* min, preferred, max */
+  padding: clamp(1rem, 5vw, 3rem);
+  gap: 2rem;
+}
+
+#dashboardHeader {
+  display: flex;
+  /* IMPORTANT -- line 46 tells browser to take all space and shove it between first and last child
+  #statusIndicator goes to the left, #brandLogo goes to the right of the header */
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--borderSubtle);
+  padding-bottom: 1rem;
+}
+
+#brandLogo {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  letter-spacing: 0.2rem;
+  font-weight: 800;
+}
+
+/* Metric Grid using CSS Grid, avoiding media queries */
+#telemetryGrid {
+  display: grid;
+  /* section becomes grid, repeat a column pattern, autofit and create as many columns in the section, at least
+  280px wide at most 1 fraction of section */
+  grid-template-columns: repeat(auto-fit, minmax(280px 1fr));
+  gap: 1.5rem;
+}
+
+/* The Metric Card - Engineered for 3D Interaction.  Includes my signature 5% background dim pseudo-element */
+.metricCard {
+  background-color: var(--bgCard);
+  border: 1px solid var(--borderSubtle);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: 
+    transform var(--transitionMain), 
+    border-color var(--transitionMain);
+  will-change: transform;
+}
+
+.metricCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--dimOverlay);
+  opacity: 0;
+  transition: opacity var(--transitionMain);
+  z-index: -1;
+}
+
+.metricCard:hover::before {
+  opacity: 0.05;
+}
+
+.metricCard:hover {
+  border-color: var(--textSecondary);
+}
+
+.cardlabel {
+  color: var(--textSecondary);
+  font-size: 0.08rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1rem;
+}
+
+.dataDisplay {
+  display: flex;
+  align-items: baseline;
+  gap: 0.05rem;
+}
+
+.metricValue {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  /* tabular-nums forces all numbers to have the exact same width (like a monospaced font, but only for the digits) */
+  font-variant-numeric: tabular-nums;
+}
+
+.metricUnit {
+  color: var(--textSecondary);
+  font-size: 1rem;
+}
+
+/* Live Pulse Animation */
+#livePulse {
+  width: 10px;
+  height: 10px;
+  background-color: var(--accentPulse);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.5rem;
+  box-shadow: 0 0 10px var(--accentPulse);
+}
+
+
+
+
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pegasus | Perforamce Telemetry</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+  <div id="appContainer">
+    <header id="dashboardHeader">
+      <div id="statusIndicator">
+        <span id="livePulse"></span>
+        <p id="systemStatus">System Active</p>
+      </div>
+      <h1 id="brandLogo">PEGASUS</h1>
+    </header>
+
+    <main id="dashboardMain">
+      <section id="TelemetryGrid">
+        
+        <article class="metricCard" id="networkLatency">          
+          <h2 class="cardLabel">Latency</h2>
+          <div class="dataDisplay">
+            <span class="metricValue">--</span>
+            <span class="metricUnit">ms</span>
+          </div>
+        </article>
+
+        <article class="metricCard" id="geoDistance">
+          <h2 class="cardLabel">Radius</h2>
+          <div class="dataDisplay">
+            <span class="metricValue">--</span>
+            <span class="metricUnit">km</span>
+          </div>
+        </article>
+
+      </section>
+    </main>
+  </div>
+  
+  <script src="js/app.js" defer></script>
+</body>
+</html>
