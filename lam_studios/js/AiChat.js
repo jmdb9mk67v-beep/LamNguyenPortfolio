@@ -1,33 +1,43 @@
 // === AI Chatbox (Lam Studios: The Ultimate Hybrid Persona) ===
 
-// 🔑 API Configuration
-// Points to your secure Netlify "Brain"
-const CHAT_ENDPOINT = 'https://reliable-dragon-75ea77.netlify.app/.netlify/functions/fetchAI'; 
+/**
+ * API Configuration
+ * Points directly to your live Vercel endpoint instead of Netlify.
+ * Keeping legacy SCREAMING_SNAKE_CASE as requested.
+ */
+const CHAT_ENDPOINT = 
+  'https://lam-nguyen-portfolio-three.vercel.app/api/chat'; 
 
-// References (Updated ID to match HTML)
+/**
+ * DOM References
+ * Selected elements for the chat interface.
+ */
 const chatToggle = document.querySelector('#chatToggle');
 const chatBox = document.querySelector('#chatBox');
 const chatMessages = document.querySelector('#chatMessages');
 const chatInput = document.querySelector('#chatInput');
-const sendBtn = document.querySelector('#sendChat'); // CHANGED from #sendBtn
+const sendBtn = document.querySelector('#sendChat'); 
 
-// 1. Toggle Chat Visibility
+/**
+ * Toggle Chat Visibility
+ * Handles the display state of the chatbox.
+ */
 if (chatToggle) {
   chatToggle.addEventListener('click', function() {
-    // Check if it's currently block (visible) or not
     const isVisible = chatBox.style.display === 'block';
     
-    // Toggle between 'none' and 'block'
     chatBox.style.display = isVisible ? 'none' : 'block';
     
-    // Auto-focus input when opening
     if (!isVisible) {
       chatInput.focus();
     }
   });
 }
 
-// 2. Event Listeners for Sending
+/**
+ * Event Listeners for Sending
+ * Triggers the main send function via click or enter key.
+ */
 if (sendBtn) {
   sendBtn.addEventListener('click', sendMessage);
 }
@@ -37,42 +47,44 @@ if (chatInput) {
   });
 }
 
-// 3. Main Send Logic
+/**
+ * Main Send Logic
+ * Captures input, updates UI, and triggers the Vercel fetch.
+ * Retaining the original setTimeout scroll hacks.
+ */
 function sendMessage() {
   const message = chatInput.value.trim();
   if(message === '') return;
 
-  // A. Display User Message
   const userMsg = document.createElement('p');
   userMsg.classList.add('user-message');
   userMsg.textContent = message;
   chatMessages.appendChild(userMsg);
 
-  // B. Reset UI
   chatInput.value = '';
   
-  // FORCE SCROLL: Tiny delay ensures CSS has applied before scrolling
   setTimeout(() => {
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }, 10);
 
-  // C. Disable Input
   chatInput.disabled = true;
   sendBtn.disabled = true;
   sendBtn.style.backgroundColor = "#ccc";
   
-  // D. Call the AI
   fetchAIResponse(message);
 }
 
-// 4. Fetch Response from Netlify
+/**
+ * Fetch Response from Vercel
+ * Connects to the serverless backend to process LAMI-1's logic.
+ * Retaining the London, Ontario reference as requested.
+ */
 function fetchAIResponse(message) {
   const aiMsg = document.createElement('p');
   aiMsg.classList.add('ai-message');
   aiMsg.textContent = "...";
   chatMessages.appendChild(aiMsg);
   
-  // Scroll to show the "..."
   setTimeout(() => {
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }, 10);
@@ -145,7 +157,6 @@ function fetchAIResponse(message) {
         sendBtn.style.backgroundColor = "#ff3366";
         chatInput.focus();
         
-        // CRITICAL FIX: Scroll again after text loads
         setTimeout(() => {
           chatMessages.scrollTop = chatMessages.scrollHeight;
         }, 50);
