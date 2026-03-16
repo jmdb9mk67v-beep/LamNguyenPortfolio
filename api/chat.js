@@ -1,47 +1,103 @@
-/* I am using a robust handler to prevent the 500 error. 
-   This version checks if req.body is already an object. 
-*/
+/**
+ * Vercel Serverless Handler for Mint & Measure AI
+ * Includes CORS configuration to allow local testing
+ * and production access from the portfolio domain.
+ */
 export default async function handler(req, res) {
-  const apiKey = process.env.GEMINI_API_KEY;
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods", 
+    "POST, OPTIONS"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers", 
+    "Content-Type"
+  );
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  /**
+   * Preflight Check Handler
+   * Intercepts browser OPTIONS request to verify CORS 
+   * and sends a 200 OK immediately.
+   */
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  /**
+   * Method Validation
+   * Strictly restricts endpoint access to POST requests.
+   */
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      error: "Method not allowed"
+    });
   }
 
   try {
-    // Vercel usually parses JSON automatically. We check first.
-    const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-    const userPrompt = body.prompt;
-
+    /**
+     * Payload Parsing and Key Validation
+     * Secures the environment key and prepares user data.
+     */
+    const apiKey = process.env.GEMINI_API_KEY;
+    
     if (!apiKey) {
-      console.error("CRITICAL: GEMINI_API_KEY is missing in Vercel settings.");
-      return res.status(500).json({ error: "API Key configuration error." });
+      console.error("CRITICAL: Missing API Key.");
+      return res.status(500).json({
+        error: "Configuration error."
+      });
     }
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+    const requestBody = typeof req.body === "string" 
+      ? JSON.parse(req.body) 
+      : req.body;
+      
+    const userPrompt = requestBody.prompt;
+
+    /**
+     * Gemini API Fetch
+     * Connects securely server-to-server to prevent 
+     * frontend credential exposure.
+     */
+    const geminiUrl = 
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+    const geminiResponse = await fetch(
+      geminiUrl,
       {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json" 
+        },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: userPrompt }] }]
+          contents: [
+            { 
+              parts: [{ text: userPrompt }] 
+            }
+          ]
         })
       }
     );
 
-    const data = await response.json();
+    const responseData = await geminiResponse.json();
 
-    if (!response.ok) {
-      console.error("Gemini API Error:", data);
-      return res.status(response.status).json(data);
+    if (!geminiResponse.ok) {
+      console.error("Gemini API Error:", responseData);
+      return res.status(geminiResponse.status).json(
+        responseData
+      );
     }
 
-    // Success: Return the data to your browser
-    return res.status(200).json(data);
+    /**
+     * Success Payload
+     * Sends the Gemini data securely back to the frontend.
+     */
+    return res.status(200).json(responseData);
 
-  } catch (error) {
-    // This will now show the EXACT error in your Vercel Logs
-    console.error("Function Crash Logic:", error.message);
-    return res.status(500).json({ error: "Internal Server Error", details: error.message });
+  } catch (errorLog) {
+    console.error("Function Crash Logic:", errorLog.message);
+    return res.status(500).json({
+      error: "Internal Server Error",
+      details: errorLog.message
+    });
   }
 }
