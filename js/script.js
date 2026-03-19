@@ -12,11 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- 2. TYPING EFFECT (The "Living" Persona) --- */
   if (statusElement) {
     const phrases = [
-      "Web Developer", "AI Integration Engineer", 
-      "UI/UX Engineer", "Code by Lam", 
-      "Application Programmer", "AI-Driven Solutions", 
-      "Building Digital Experiences", "Mobile Web Developer"
+      "Web Developer", 
+      "Designing Intelligent Web Experiences with AI Precision",
+      "Code by Lam", 
+      "App Developer", "AI-Driven Solutions", 
+      "Building the Future of the Web -- Human x AI",
+      "Human-Led. AI-Enhanced. Web Excellence.",
     ];
+
     let phraseIdx = 0, charIdx = 0, isDeleting = false, speed = 100;
 
     const typeEffect = () => {
