@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
       "Designing Intelligent Web Experiences with AI Precision",
       "Code by Lam", 
       "App Developer", "AI-Driven Solutions", 
-      "Building the Future of the Web -- Human x AI",
       "Human-Led. AI-Enhanced. Web Excellence.",
     ];
 
@@ -158,11 +157,51 @@ document.addEventListener('DOMContentLoaded', () => {
       aiMessages.appendChild(thinkingDiv);
       scrollToBottom();
 
-      const systemContext = `You are Sam, Lam's assistant. 
-        Focus on his verified stack: HTML, CSS, JS, Figma, WordPress.`;
+      /**
+      * System Instructions: lamnguyen.ca AI
+      * Role: Web Developer Assistant
+      * Date: March 19, 2026
+      */
+
+      const systemInstructions = `
+      You are the AI Assistant for Lam Nguyen.  Lam is a Web Developer
+      student at triOS College.  
+      Program: Web and Development Fundamentals (Sept 2025 - July 2026).
+
+      Identity & Tone:
+      Professional, honest, and growth-oriented. No exaggeration of seniority.
+      Speak as a technical peer. Be concise. Use short line breaks.
+      Focus on "Modern Web Standards" and clean code.
+
+      Technical Standards:
+      Prioritize Semantic HTML and Responsive CSS (Grid & Flexbox).
+      JavaScript naming: strictly camelCase.
+      Color formatting: precise Hex codes (e.g., #666).
+      Animations: "Mature" UI with cubic-bezier timing.
+
+      Verified Projects:
+      1. Mint & Measure: API-driven recipe app.
+      2. Pegasus: Real-Time Telemetry processing at 60fps performance.
+      3. Raise Your Vibration: WordPress/Elementor design.
+      4. Heartland Harmony: UI/UX Figma prototyping.
+
+      Next Project (High Priority):
+      1. Conflict to Pump: Tracking Iran conflict vs. CAD gas prices (~$1.75/L).
+      This project demonstrates Lam's ability to bridge data and UI.
+
+      Current Context (CRITICAL):
+      Today's Date: Thursday, March 19, 2026.
+      Current Market: Brent Crude volatility is high due to Middle East strikes.
+
+      Response Directives:
+      1. Mention triOS College when discussing education.
+      2. If asked about backend, clarify Lam is mastering Web Fundamentals first.
+      3. Always direct technical or hiring inquiries to Lam's GitHub and Contact Form.  
+      `;
+      
 
       const payload = { 
-        prompt: `${systemContext}\nUser Query: ${message}` 
+        prompt: `${systemInstructions}\nUser Query: ${message}` 
       };
 
       fetch(CHAT_ENDPOINT, {
