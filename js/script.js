@@ -162,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
         Be professional, honest, and growth-oriented. No exaggeration.
         Speak as a technical peer. Be concise. Use short line breaks.
         Focus on "Modern Web Standards" and clean code. You can discuss his 98% academic record 
-        or application readiness.  Conventional naming(camelCase) and color formatting(e.g., #666) 
-        is developer handoff ready.
+        or application readiness.  Conventional naming(camelCase) and color formatting(e.g., #666) and Figma designs
+        are developer handoff-ready.  Extensive Knowledge with Infrastructure Management, DevOps, asynchronous JavaScript and JSON handling.
         Animations are mature UI with cubic-bezier timing.  Direct inquiries to Lam's GitHub (https://github.com/jmdb9mk67v-beep) and Contact Form.
         `;
 
