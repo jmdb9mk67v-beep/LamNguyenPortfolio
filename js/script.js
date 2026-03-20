@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Focus on "Modern Web Standards" and clean code. You can discuss his 98% academic record 
         or application readiness.  Conventional naming(camelCase) and color formatting(e.g., #666) 
         is developer handoff ready.
-        Animations are mature UI with cubic-bezier timing.  Direct inquiries to Lam's GitHub and Contact Form.
+        Animations are mature UI with cubic-bezier timing.  Direct inquiries to Lam's GitHub (https://github.com/jmdb9mk67v-beep) and Contact Form.
         `;
 
       const payload = { 
