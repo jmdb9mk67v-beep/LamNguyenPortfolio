@@ -34,6 +34,7 @@ async function fetchMarketImpact() {
 
     if (result.status === "success") {
       appState.data = result;
+      console.log("Data Re-Rendered:", result);
       renderDashboard();
     }
   } catch (error) {
