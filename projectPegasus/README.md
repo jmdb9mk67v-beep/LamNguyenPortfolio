@@ -1,16 +1,33 @@
-# Project-Pegasus
-A Real-Time Telemetry &amp; Performance Dashboard
+# 🚀 Project Pegasus: Performance Dashboard
 
+A real-time telemetry interface built to show how web 
+applications can handle fast-moving data with smooth, 
+high-performance visuals. Developed as a technical 
+showcase for development internship interviews.
 
-A high-fidelity telemetry interface engineered for real-time data visualization and hardware-accelerated interaction. Developed as a technical showcase for Application & Web Development internship interviews.
+## 🌟 Key Features
+* **Interaction Physics:** Custom JavaScript 3D tilt 
+  effects that react to your mouse movements 
+  without slowing down the browser.
+* **Performance First:** Built to run at a steady 60fps 
+  by avoiding "layout thrashing" and using modern 
+  rendering techniques.
+* **Modern Layout:** Uses CSS Grid, Flexbox, and 
+  `clamp()` to ensure the dashboard looks perfect 
+  on any screen size.
+* **Data Stability:** Uses "tabular numbers" so the 
+  UI remains still and readable even when data 
+  updates at high frequencies.
 
-## Technical Highlights
-* **Interaction Physics:** Custom JS-driven 3D tilt mechanics using coordinate vector mapping (Max 4deg tilt / -4px translate).
-* **Rendering Optimization:** Utilizes `will-change: transform` and `requestAnimationFrame` principles to ensure 60fps performance with zero layout thrashing.
-* **Fluid UI Architecture:** Modern responsive construction using CSS Grid, Flexbox, and `clamp()` for dynamic scaling.
-* **Data Integrity:** Implements `font-variant-numeric: tabular-nums` to ensure visual stability during high-frequency data updates.
+## 🛠️ Technical Specs
+* **Theme:** High-contrast Matte Dark (#0a0a0a).
+* **Units:** Strictly Metric (km/ms) for all telemetry.
+* **Architecture:** Separation of concerns—the simulation 
+  engine is decoupled from the visual design for 
+  professional-grade stability.
 
-## Performance Specs
-* **Theme:** High-contrast matte (#0a0a0a)
-* **Units:** Strictly Metric (km/ms)
-* **Logic:** Decoupled simulation engine for predictable demonstration stability.
+## 🚀 How to View
+1. Clone the "stand alone" repository (NOT LamNguyenPortfolio) to your Mac.
+2. Open `index.html` in any modern browser.
+3. Move your cursor over the telemetry cards to 
+   trigger the hardware-accelerated 3D effects.
