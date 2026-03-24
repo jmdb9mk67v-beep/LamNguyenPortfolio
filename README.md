@@ -1,9 +1,4 @@
-![Visitors](https://komarev.com/ghpvc/
-?username=jmdb9mk67v-beep
-&repo=LamNguyenPortfolio
-&color=0a0a0a
-&style=flat-square
-&label=VISITORS)
+![Visitors](https://komarev.com/ghpvc/?username=jmdb9mk67v-beep&repo=LamNguyenPortfolio&color=0a0a0a&style=flat-square&label=VISITORS)
 
 <div align="center">
   <img src="assets/images/gitHubHeaderPic.png" alt="LAM Studios Header" width="100%">
