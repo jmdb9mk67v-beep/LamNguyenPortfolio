@@ -1,141 +1,103 @@
-/* Reset: Foundation 
-   for fluid scaling 
-   and box sizing */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* Base: Setup body 
-   with hex colors 
-   and tabular nums */
+/* Layout: Fluid typography and grid
+   establishment utilizing clamp
+   for pure responsiveness without
+   brittle media queries. */
 body {
-  background-color: #0a0a0a;
-  color: #eeeeee;
-  font-family: system-ui, sans-serif;
-  font-variant-numeric: tabular-nums;
-  min-height: 100vh;
-  padding: clamp(1rem, 5vw, 3rem);
-}
-
-/* Header: Flexbox 
-   layout for clean 
-   alignment */
-.dashboardHeader {
+  background-color: #111;
+  color: #fff;
+  font-family: sans-serif;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: clamp(2rem, 6vw, 4rem);
+  padding: clamp(1rem, 5vw, 4rem);
+  margin: 0;
 }
 
-/* Grid: Fluid CSS Grid 
-   without media queries 
-   using auto-fit */
 .dashboardGrid {
   display: grid;
-  gap: clamp(1rem, 3vw, 2rem);
-  grid-template-columns: 
-    repeat(auto-fit, minmax(clamp(250px, 30vw, 400px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
 }
 
-/* Card: Core structure 
-   for the mature 
-   glass aesthetic */
+/* Base: Architectural rules for
+   glass cards with strict hardware
+   acceleration and transform origin
+   preservation for smooth 3D. */
 .glassCard {
-  background-color: #111111;
-  border: 1px solid #222222;
+  position: relative;
+  background: #222;
+  border: 1px solid #333;
   border-radius: 12px;
   padding: 2rem;
-  position: relative;
-  overflow: hidden;
+  text-align: center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
-  transition: 
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  transform: 
-    perspective(1000px) 
-    rotateX(var(--rotateX, 0deg)) 
-    rotateY(var(--rotateY, 0deg)) 
-    translateY(var(--translateY, 0px));
+  transform: perspective(1000px)
+             rotateX(var(--rotateX, 0deg))
+             rotateY(var(--rotateY, 0deg))
+             translateY(0px);
+  isolation: isolate;
+  overflow: hidden;
 }
 
-/* Dim: Signature 5% 
-   background layering 
-   using pseudo-element */
+/* Depth: Localized backdrop dimming
+   pseudo-element to create a true
+   depth layer of 5% pure black
+   beneath the card content. */
 .glassCard::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: #000000;
-  opacity: 0;
-  transition: 
-    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 1;
-}
-
-/* Hover: Trigger tilt, 
-   light bloom, and 
-   border intensification */
-.glassCard:hover {
-  --translateY: -4px;
-  border-color: #444444;
-  box-shadow: 
-    inset 0 0 20px #ffffff11,
-    0 10px 30px #00000099;
-}
-
-.glassCard:hover::before {
+  background: #000;
   opacity: 0.05;
+  z-index: -1;
 }
 
-/* Content: Ensure text 
-   sits above the 
-   pseudo-backdrop */
-.cardLabel, 
-.value {
-  position: relative;
-  z-index: 2;
+/* Hover: Activates negative translateY,
+   border intensification, and an
+   inner radial light gradient
+   for a mature bloom effect. */
+.glassCard:hover {
+  transform: perspective(1000px)
+             rotateX(var(--rotateX, 0deg))
+             rotateY(var(--rotateY, 0deg))
+             translateY(-4px);
+  border-color: #555;
+  background: radial-gradient(
+    circle at 50% 0%,
+    #333 0%,
+    #222 70%
+  );
 }
 
-.cardLabel {
-  color: #888888;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 1rem;
-}
-
-.value {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 300;
-  color: #ffffff;
-}
-
-/* Button: High-end 
-   refresh control 
-   with shimmer setup */
+/* Button: Refined styling with
+   relative positioning to contain
+   the absolute shimmer sweep effect
+   without visual overflow. */
 .refreshAction {
-  background-color: #222222;
-  color: #ffffff;
-  border: 1px solid #333333;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
+  margin-top: 3rem;
+  padding: 1rem 2rem;
+  background: #333;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 8px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: 
-    background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .refreshAction:hover {
-  background-color: #333333;
+  transform: translateY(-2px);
 }
 
-/* Shimmer: Single sweep 
-   effect triggered 
-   by JS active class */
+/* Shimmer: A pseudo-element sweep
+   across the button, triggered
+   once per click event by
+   dynamic JS class toggling. */
 .refreshAction::after {
   content: "";
   position: absolute;
@@ -143,25 +105,19 @@ body {
   left: -100%;
   width: 50%;
   height: 100%;
-  background: 
-    linear-gradient(
-      90deg, 
-      #ffffff00 0%, 
-      #ffffff22 50%, 
-      #ffffff00 100%
-    );
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
   transform: skewX(-20deg);
 }
 
-.refreshAction.shimmerActive::after {
-  animation: 
-    sweep 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.shimmerActive::after {
+  animation: singleShimmer 0.35s ease-out forwards;
 }
 
-/* Animation: Keyframes 
-   for the button 
-   shimmer sweep */
-@keyframes sweep {
-  0% { left: -100%; }
+@keyframes singleShimmer {
   100% { left: 200%; }
 }
