@@ -104,8 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* --- 6. AI INTEGRATION ENGINE (Sam) --- */
-  const CHAT_ENDPOINT = '/api/chat'; 
+/* --- 6. AI INTEGRATION ENGINE (Sam with Memory) --- */
+  const chatEndpoint = '/api/chat'; 
   const aiToggle = document.querySelector('#ai-toggle-btn');
   const aiClose = document.querySelector('#ai-close-btn');
   const aiWindow = document.querySelector('#ai-chat-window');
@@ -114,10 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const aiMessages = document.querySelector('#ai-chat-messages');
   const aiSubmit = document.querySelector('.ai-submit-btn');
 
+  /* Persistent memory array to stop the repetition loop */
+  let chatHistory = [];
+
   const scrollToBottom = () => { 
     if (aiMessages) aiMessages.scrollTop = aiMessages.scrollHeight; 
   };
 
+  /* UI state management: Opens the Sam window */
   if (aiToggle && aiWindow) {
     aiToggle.addEventListener('click', () => {
       aiWindow.classList.add('active');
@@ -127,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* UI state management: Closes the Sam window */
   if (aiClose && aiWindow) {
     aiClose.addEventListener('click', () => {
       aiWindow.classList.remove('active');
@@ -135,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* Logic for stateful conversation and history tracking */
   if (aiForm) {
     aiForm.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -157,21 +163,19 @@ document.addEventListener('DOMContentLoaded', () => {
       aiMessages.appendChild(thinkingDiv);
       scrollToBottom();
 
-      const systemContext = `You are Sam, Lam's AI assistant. 
-        Focus on his verified stack: HTML, CSS, JS, Figma, WordPress, GitHub & VS Code. 
-        Be professional, honest, and growth-oriented. No exaggeration.
-        Speak as a technical peer. Be concise. Use short line breaks.
-        Focus on "Modern Web Standards" and clean code. You can discuss his 98% academic record 
-        or application readiness.  Conventional naming(camelCase) and color formatting(e.g., #666) and Figma designs
-        are developer handoff-ready.  Extensive Knowledge with Infrastructure Management, DevOps, asynchronous JavaScript and JSON handling.
-        Animations are mature UI with cubic-bezier timing.  Direct inquiries to Lam's GitHub (https://github.com/jmdb9mk67v-beep) and Contact Form.
-        `;
+      const systemContext = `You are Sam, Lam's AI. 
+        verified stack: HTML, CSS, JS, GitHub. 
+        Professional technical peer. Concise. 
+        Use short line breaks. No repeating intros.`;
 
+      /* Construct payload with memory buffer */
       const payload = { 
-        prompt: `${systemContext}\nUser Query: ${message}` 
+        prompt: message,
+        history: chatHistory,
+        systemInstruction: systemContext
       };
 
-      fetch(CHAT_ENDPOINT, {
+      fetch(chatEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload) 
@@ -183,6 +187,13 @@ document.addEventListener('DOMContentLoaded', () => {
           text = data.candidates[0].content.parts[0].text;
         }
         
+        /* Store turn in memory for the next exchange */
+        chatHistory.push({ role: 'user', content: message });
+        chatHistory.push({ role: 'model', content: text });
+
+        /* Keep history light (last 10 messages) */
+        if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);
+
         thinkingDiv.innerHTML = text
           .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
           .replace(/\n/g, '<br>'); 
@@ -196,4 +207,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
+}); // <--- THIS is the bracket that was likely missing!
