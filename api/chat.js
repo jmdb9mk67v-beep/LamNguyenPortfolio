@@ -58,7 +58,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         contents: contents,
         system_instruction: {
-          parts: [{ text: systemInstruction || "You are Sam, a helpful assistant." }]
+          parts: [{ text: systemInstruction || "You are Sam, a helpful and friendly assistant." }]
         },
         generationConfig: {
           temperature: 0.75,   /* Balance between creative & factual */

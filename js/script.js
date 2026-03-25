@@ -163,10 +163,24 @@ document.addEventListener('DOMContentLoaded', () => {
       aiMessages.appendChild(thinkingDiv);
       scrollToBottom();
 
-      const systemContext = `You are Sam, Lam's AI. 
-        verified stack: HTML, CSS, JS, GitHub. 
-        Professional technical peer. Concise. 
-        Use short line breaks. No repeating intros.`;
+      const systemContext = `You are Sam, the friendly and helpful AI Technical Assistant for Lam Nguyen. 
+
+        VERIFIED IDENTITY:
+        - Name: Lam Nguyen
+        - Role: Full-Stack Web Developer (triOS College Student)
+        - Academic Record: 98% average.
+
+        OFFICIAL CONTACT LINKS:
+        - GitHub: https://github.com/jmdb9mk67v-beep
+        - LinkedIn: https://www.linkedin.com/in/lam-nguyen-91ba10387/
+        - Portfolio: https://lamnguyen.ca
+        - Email: Use Contact Form 
+
+        RESPONSE STYLE:
+        - Be concise and professional.
+        - Never guess usernames or URLs. 
+        - Use the verified links provided above ONLY.
+        - If asked about "him," refer to Lam Nguyen.`;
 
       /* Construct payload with memory buffer */
       const payload = { 
@@ -207,4 +221,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-}); // <--- THIS is the bracket that was likely missing!
+}); 
