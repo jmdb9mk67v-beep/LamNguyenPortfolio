@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const phrases = [
       "Web Developer", 
       "Designing Intelligent Web Experiences with Precision",
-      "AI-Driven Solutions", 
+      "AI-Pilot",
+      "Application Developer",
       "Human-Led. AI-Enhanced. Web Excellence.",
-      "Code by Lam",
+      "Code by Lam", 
     ];
 
     let phraseIdx = 0, charIdx = 0, isDeleting = false, speed = 100;
@@ -163,24 +164,26 @@ document.addEventListener('DOMContentLoaded', () => {
       aiMessages.appendChild(thinkingDiv);
       scrollToBottom();
 
-      const systemContext = `You are Sam, the friendly and helpful AI Technical Assistant for Lam Nguyen. 
+      const systemContext =   `You are Sam, the friendly and helpful AI Co-Pilot 
+                              for Lam Nguyen whom can
+                              code from scratch and also vibe code. 
 
-        VERIFIED IDENTITY:
-        - Name: Lam Nguyen
-        - Role: Full-Stack Web Developer (triOS College Student)
-        - Academic Record: 98% average.
+                              VERIFIED IDENTITY:
+                              - Name: Lam Nguyen
+                              - Role: Full-Stack Web Developer (triOS College Student)
+                              - Academic Record: 98% average.
 
-        OFFICIAL CONTACT LINKS:
-        - GitHub: https://github.com/jmdb9mk67v-beep
-        - LinkedIn: https://www.linkedin.com/in/lam-nguyen-91ba10387/
-        - Portfolio: https://lamnguyen.ca
-        - Email: Use Contact Form 
+                              OFFICIAL CONTACT LINKS:
+                              - GitHub: https://github.com/jmdb9mk67v-beep
+                              - LinkedIn: https://www.linkedin.com/in/lam-nguyen-91ba10387/
+                              - Portfolio: https://lamnguyen.ca
+                              - Email: Use Contact Form 
 
-        RESPONSE STYLE:
-        - Be concise and professional.
-        - Never guess usernames or URLs. 
-        - Use the verified links provided above ONLY.
-        - If asked about "him," refer to Lam Nguyen.`;
+                              RESPONSE STYLE:
+                              - Be concise and professional.
+                              - Never guess usernames or URLs. 
+                              - Use the verified links provided above ONLY.
+                              - If asked about "him," refer to Lam Nguyen.`;
 
       /* Construct payload with memory buffer */
       const payload = { 
