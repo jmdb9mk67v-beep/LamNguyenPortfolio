@@ -45,4 +45,4 @@ tabBtns.forEach(btn => {
   });
 });
 
-// Logic finished. Safe from layout thrashing as we only animate opacity.
+// Logic finished. Safe from layout thrashing as we only animate opacity. TA-DA!
