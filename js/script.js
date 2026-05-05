@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const phrases = [
       "Web Developer", 
       "Designing Intelligent Web Experiences with Precision",
-      "AI-Pilot",
       "Application Developer",
       "Human-Led. AI-Enhanced. Web Excellence.",
       "Code by Lam", 
