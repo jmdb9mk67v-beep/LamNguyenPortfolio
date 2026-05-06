@@ -224,58 +224,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 }); 
 
-//***  Navigation Menu ***//
+/* Navigation Menu */
 
-const navLinks = document.querySelectorAll('.navLink');
+const sideNav = 
+  document.querySelector('#sideNav');
+const navToggle = 
+  document.querySelector('#navToggle');
+const navLinks = 
+  document.querySelectorAll('.navLink');
 // variableDeclarations
 
-navLinks.forEach(link => {
-  link.addEventListener('click', (event) => {
-    const targetId = link.getAttribute('href');
-    
-    if (targetId.startsWith('#')) {
-      event.preventDefault();
-      const targetElement = document.querySelector(targetId);
-      
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }
+if (navToggle && sideNav) {
+  navToggle.addEventListener('click', () => {
+    sideNav.classList.toggle('navOpen');
   });
-});
-// smoothScrollLogic
+}
+// mobileToggleLogic
 
-// Mobile Toggle logic
-const navToggle = document.querySelector('#navToggle');
-const sideNav = document.querySelector('#sideNav');
-const navLinks = document.querySelectorAll('.navLink');
-// variableDeclarations
-
-navToggle.addEventListener('click', () => {
-  sideNav.classList.toggle('navOpen');
-});
-// toggleMenuLogic
-
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    // Close menu when a link is clicked on mobile
+navLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
     sideNav.classList.remove('navOpen');
-  });
-});
-// closeOnLinkClickLogic
 
-// Smooth Scroll Logic
-navLinks.forEach(link => {
-  link.addEventListener('click', (event) => {
-    const targetId = link.getAttribute('href');
-    
+    const targetId = 
+      link.getAttribute('href');
+
     if (targetId.startsWith('#')) {
       event.preventDefault();
-      const targetElement = document.querySelector(targetId);
-      
+      const targetElement = 
+        document.querySelector(targetId);
+
       if (targetElement) {
         targetElement.scrollIntoView({
           behavior: 'smooth',
@@ -285,4 +262,4 @@ navLinks.forEach(link => {
     }
   });
 });
-// smoothScrollLogic
+// combinedLinkLogic
