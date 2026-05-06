@@ -930,87 +930,56 @@ iframe {
 
 /* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
+  /* 1. Ensure the Nav is the absolute top layer */
   .sideNav {
-    width: 100%;
-    height: 70px;
-    flex-direction: row;
+    width: 100% !important;
+    height: 70px !important;
+    background: rgba(10, 10, 10, 0.95) !important; /* Solid dark glass */
+    backdrop-filter: blur(15px);
+    z-index: 10000 !important; /* Absolute top */
+    display: flex !important;
     align-items: center;
-    padding: 0 1.5rem;
-    overflow: visible;
-    z-index: 9999;
-  }
-  /* mobile sideNav bar */
-
-  .navHeader {
-    flex-direction: row;
     justify-content: space-between;
-    padding: 0;
+    padding: 0 1.5rem !important;
   }
-  /* mobile navHeader alignment */
+  /* mobileNavTopLayer */
 
-  .navToggle {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1100;
+  /* 2. Push your profile picture down so it's not covered */
+  header.content-div {
+    padding-top: 90px !important; /* Forces content below the 70px nav */
   }
-  /* navToggle reveal */
+  /* contentOffsetFix */
 
-  .hamburgerLine {
-    width: 25px;
-    height: 2px;
-    background: #fff;
-    transition: 0.3s ease;
-  }
-  /* hamburgerLine */
-
+  /* 3. Force the Menu Drawer to sit on top of everything */
   .navList {
-    display: flex;
-    position: fixed;
-    top: 70px;
+    display: flex !important;
+    flex-direction: column !important;
+    position: fixed !important;
+    top: 70px !important;
     left: 0;
     width: 100%;
     height: calc(100vh - 70px);
-    background: #0a0a0a;
-    flex-direction: column;
-    padding-top: 2rem;
+    background-color: #0a0a0a !important; /* Solid background so content doesn't bleed through */
     transform: translateX(-100%);
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    /* The Slide Logic */
-    transform: translateX(-100%);
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    
-    /* Ensure it sits on top of the main content */
-    z-index: 9998; 
+    z-index: 9999 !important; 
+    padding: 2rem !important;
   }
-  /* mobile navList drawer */
+  /* menuDrawerFix */
 
+  /* 4. Trigger the slide */
   .sideNav.navOpen .navList {
-    transform: translateX(0);
+    transform: translateX(0) !important;
   }
-  /* navList slide in */
+  /* navOpenTrigger */
 
+  /* Ensure labels are white and visible */
   .navLabel {
-    opacity: 1;
-    display: inline-block !important;
-    color: #fff !important; 
+    opacity: 1 !important;
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+    margin-top: 1rem;
   }
-  /* navLabel permanent on mobile */
-
-  .sideNav.navOpen .hamburgerLine:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-    background: #f07;
-  }
-  .sideNav.navOpen .hamburgerLine:nth-child(2) {
-    opacity: 0;
-  }
-  .sideNav.navOpen .hamburgerLine:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-    background: #f07;
-  }
-  /* hamburger to X animation */
+  /* labelVisibilityMobile */
 }
-/* mobileMediaQuery */
+/* mobilePolishOverrides */
