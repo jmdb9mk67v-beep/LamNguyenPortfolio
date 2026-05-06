@@ -1,0 +1,226 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* reset */
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+/* body */
+
+#pinkFlashOverlay {
+  position: fixed;
+  top: -150vh;
+  left: -150vw;
+  width: 300vw;
+  height: 300vh;
+  background-color: #f07;
+  z-index: 9999;
+  pointer-events: none;
+  transform: rotate(45deg) translateY(-50%);
+  animation: wipeDiagonal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform;
+}
+/* pinkFlashOverlay */
+
+@keyframes wipeDiagonal {
+  0% {
+    transform: rotate(45deg) translateY(-50%);
+  }
+  100% {
+    transform: rotate(45deg) translateY(100%);
+  }
+}
+/* wipeDiagonal */
+
+#mainContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+/* mainContainer */
+
+.heroCanvas {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/images/LamBo.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  animation: slowZoom 20s linear infinite alternate;
+  will-change: transform;
+  z-index: 1;
+}
+/* heroCanvas */
+
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+/* slowZoom */
+
+.splashContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem;
+  text-align: center;
+  border-radius: 24px;
+  border: 1px solid transparent;
+  will-change: transform;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+}
+/* splashContent */
+
+.splashContent:hover {
+  border-color: #333;
+  box-shadow: inset 0 0 40px #fff1;
+}
+/* splashContent hover */
+
+.backdropDim {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 24px;
+  z-index: 0;
+}
+/* backdropDim */
+
+.splashContent:hover .backdropDim {
+  opacity: 0.05;
+}
+/* backdropDim hover */
+
+.textContent {
+  position: relative;
+  z-index: 2;
+  transform: translateZ(30px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+/* textContent */
+
+.developerName {
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 800;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+/* developerName */
+
+.developerSubtitle {
+  color: #aaa;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: simpleFade 1s ease forwards 0.8s;
+}
+/* developerSubtitle */
+
+@keyframes simpleFade {
+  to {
+    opacity: 1;
+  }
+}
+/* simpleFade */
+
+.tossIn {
+  opacity: 0;
+  transform: scale(0.5) translateY(-50px) rotateZ(-10deg);
+  animation: tossEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  will-change: transform, opacity;
+}
+/* tossIn */
+
+.developerName.tossIn {
+  animation-delay: 0.4s;
+}
+/* developerName tossIn delay */
+
+.primaryButton.tossIn {
+  animation-delay: 0.8s;
+}
+/* primaryButton tossIn delay */
+
+@keyframes tossEntrance {
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotateZ(0deg);
+  }
+}
+/* tossEntrance */
+
+.primaryButton {
+  position: relative;
+  overflow: hidden;
+  background-color: #111;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 1.2rem 3rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* primaryButton */
+
+.primaryButton::before {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: -100%;
+  width: 50%; 
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #fff3,
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: none;
+}
+/* primaryButton shimmer */
+
+.primaryButton:hover {
+  border-color: #888;
+}
+/* primaryButton hover */
+
+.primaryButton:hover::before {
+  left: 200%;
+  transition: left 0.7s ease;
+}
+/* primaryButton shimmer hover */
