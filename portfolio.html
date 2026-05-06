@@ -27,11 +27,18 @@
 
 <body>
 
-  <nav class="sideNav">
-  <a href="index.html" class="navBrand">
-    <img src="assets/images/logoStudio.png" 
-         alt="LS" class="navLogo">
-  </a>
+  <nav id="sideNav" class="sideNav">
+  <div class="navHeader">
+    <a href="index.html" class="navBrand">
+      <img src="assets/images/logoStudio.png" 
+           alt="LS" class="navLogo">
+    </a>
+    <button id="navToggle" class="navToggle" aria-label="Toggle Menu">
+      <span class="hamburgerLine"></span>
+      <span class="hamburgerLine"></span>
+      <span class="hamburgerLine"></span>
+    </button>
+  </div>
   <ul class="navList">
     <li>
       <a href="#mainContainer" class="navLink">
@@ -40,7 +47,8 @@
       </a>
     </li>
     <li>
-      <a href="https://jmdb9mk67v-beep.github.io/index.html" class="navLink">
+      <a href="https://jmdb9mk67v-beep.github.io/index.html" 
+         class="navLink">
         <span class="navIcon">A</span>
         <span class="navLabel">About Me</span>
       </a>

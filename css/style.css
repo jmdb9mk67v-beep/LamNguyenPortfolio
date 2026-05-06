@@ -849,6 +849,7 @@ iframe {
   outline: none;
 }
 
+/* --- Desktop Sidebar Architecture --- */
 .sideNav {
   position: fixed;
   left: 0;
@@ -861,27 +862,41 @@ iframe {
   border-right: 1px solid #222;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 2rem 0;
-  z-index: 100;
+  z-index: 1000;
   transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
 }
 /* sideNav base */
 
 .sideNav:hover {
   width: 200px;
 }
-/* sideNav expansion */
+/* sideNav hover expansion */
+
+.navHeader {
+  width: 100%;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* navHeader */
 
 .navLogo {
   width: 40px;
-  margin-bottom: 3rem;
+  transition: transform 0.3s ease;
 }
 /* navLogo */
+
+.navToggle {
+  display: none; /* Hidden on desktop */
+}
+/* navToggle hidden */
 
 .navList {
   list-style: none;
   width: 100%;
+  margin-top: 2rem;
 }
 /* navList */
 
@@ -891,24 +906,15 @@ iframe {
   padding: 1.2rem;
   color: #888;
   text-decoration: none;
-  transition: color 0.3s ease;
   white-space: nowrap;
-  overflow: hidden;
+  transition: color 0.3s ease;
 }
 /* navLink */
 
 .navLink:hover {
-  color: #f07; /* Your signature pink */
+  color: #f07;
 }
 /* navLink hover */
-
-.navIcon {
-  min-width: 40px;
-  text-align: center;
-  font-weight: 800;
-  font-size: 1.2rem;
-}
-/* navIcon */
 
 .navLabel {
   margin-left: 1rem;
@@ -922,8 +928,79 @@ iframe {
 }
 /* navLabel reveal */
 
-main, header, footer {
-  margin-left: 80px;
-  width: calc(100% - 80px);
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .sideNav {
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 1.5rem;
+    overflow: visible;
+  }
+  /* mobile sideNav bar */
+
+  .navHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+  }
+  /* mobile navHeader alignment */
+
+  .navToggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+  }
+  /* navToggle reveal */
+
+  .hamburgerLine {
+    width: 25px;
+    height: 2px;
+    background: #fff;
+    transition: 0.3s ease;
+  }
+  /* hamburgerLine */
+
+  .navList {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: #0a0a0a;
+    flex-direction: column;
+    padding-top: 2rem;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* mobile navList drawer */
+
+  .sideNav.navOpen .navList {
+    transform: translateX(0);
+  }
+  /* navList slide in */
+
+  .navLabel {
+    opacity: 1;
+  }
+  /* navLabel permanent on mobile */
+
+  .sideNav.navOpen .hamburgerLine:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    background: #f07;
+  }
+  .sideNav.navOpen .hamburgerLine:nth-child(2) {
+    opacity: 0;
+  }
+  .sideNav.navOpen .hamburgerLine:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    background: #f07;
+  }
+  /* hamburger to X animation */
 }
-/* content offset */
+/* mobileMediaQuery */

@@ -247,3 +247,42 @@ navLinks.forEach(link => {
   });
 });
 // smoothScrollLogic
+
+// Mobile Toggle logic
+const navToggle = document.querySelector('#navToggle');
+const sideNav = document.querySelector('#sideNav');
+const navLinks = document.querySelectorAll('.navLink');
+// variableDeclarations
+
+navToggle.addEventListener('click', () => {
+  sideNav.classList.toggle('navOpen');
+});
+// toggleMenuLogic
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    // Close menu when a link is clicked on mobile
+    sideNav.classList.remove('navOpen');
+  });
+});
+// closeOnLinkClickLogic
+
+// Smooth Scroll Logic
+navLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    const targetId = link.getAttribute('href');
+    
+    if (targetId.startsWith('#')) {
+      event.preventDefault();
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+  });
+});
+// smoothScrollLogic
