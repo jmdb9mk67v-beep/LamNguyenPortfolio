@@ -226,40 +226,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* Navigation Menu */
 
-const sideNav = 
-  document.querySelector('#sideNav');
-const navToggle = 
-  document.querySelector('#navToggle');
-const navLinks = 
-  document.querySelectorAll('.navLink');
-// variableDeclarations
+document.addEventListener('DOMContentLoaded', () => {
+  const sideNav = document.querySelector('#sideNav');
+  const navToggle = document.querySelector('#navToggle');
+  const navLinks = document.querySelectorAll('.navLink');
+  // variableDeclarations
 
-if (navToggle && sideNav) {
-  navToggle.addEventListener('click', () => {
-    sideNav.classList.toggle('navOpen');
+  if (navToggle && sideNav) {
+    navToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation(); // Stops the click from 'bleeding' into other elements
+      sideNav.classList.toggle('navOpen');
+      console.log('Mobile menu state toggled');
+    });
+  }
+  // mobileToggleLogic
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      sideNav.classList.remove('navOpen');
+    });
   });
-}
-// mobileToggleLogic
-
-navLinks.forEach((link) => {
-  link.addEventListener('click', (event) => {
-    sideNav.classList.remove('navOpen');
-
-    const targetId = 
-      link.getAttribute('href');
-
-    if (targetId.startsWith('#')) {
-      event.preventDefault();
-      const targetElement = 
-        document.querySelector(targetId);
-
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    }
-  });
+  // linkAutoCloseLogic
 });
-// combinedLinkLogic
+// navEngineInitialized
