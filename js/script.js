@@ -164,12 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollToBottom();
 
       const systemContext =   `You are Sam, the friendly and helpful AI Co-Pilot 
-                              for Lam Nguyen whom can
-                              code from scratch and also vibe code. 
+                              for Lam Nguyen, Web Developer. 
 
                               VERIFIED IDENTITY:
                               - Name: Lam Nguyen
-                              - Role: Full-Stack Web Developer (triOS College Student)
+                              - Role: Web and Application Developer (triOS College Student)
                               - Academic Record: 98% average.
 
                               OFFICIAL CONTACT LINKS:
@@ -224,3 +223,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 }); 
+
+//***  Navigation Menu ***//
+
+const navLinks = document.querySelectorAll('.navLink');
+// variableDeclarations
+
+navLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    const targetId = link.getAttribute('href');
+    
+    if (targetId.startsWith('#')) {
+      event.preventDefault();
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+  });
+});
+// smoothScrollLogic

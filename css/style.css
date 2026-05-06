@@ -836,3 +836,94 @@ iframe {
 .ai-submit-btn:hover {
   transform: translateY(-2px);
 }
+
+/* Navigation Menu */
+
+.navBrand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.sideNav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 80px;
+  background: #111111b3;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  z-index: 100;
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* sideNav base */
+
+.sideNav:hover {
+  width: 200px;
+}
+/* sideNav expansion */
+
+.navLogo {
+  width: 40px;
+  margin-bottom: 3rem;
+}
+/* navLogo */
+
+.navList {
+  list-style: none;
+  width: 100%;
+}
+/* navList */
+
+.navLink {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+  color: #888;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+}
+/* navLink */
+
+.navLink:hover {
+  color: #f07; /* Your signature pink */
+}
+/* navLink hover */
+
+.navIcon {
+  min-width: 40px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+/* navIcon */
+
+.navLabel {
+  margin-left: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+/* navLabel */
+
+.sideNav:hover .navLabel {
+  opacity: 1;
+}
+/* navLabel reveal */
+
+main, header, footer {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+}
+/* content offset */
