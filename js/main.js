@@ -38,3 +38,19 @@ enterGalleryBtn.addEventListener('click', () => {
   window.location.href = 'portfolio.html';
 });
 // enterGalleryRouting
+
+/* Glowing Eyes and Button Pulse logic */
+const glowEyesLayer = document.querySelector('#glowEyesLayer');
+
+enterGalleryBtn.addEventListener('mouseenter', () => {
+  requestAnimationFrame(() => {
+    glowEyesLayer.classList.add('isGlowing');
+  });
+});
+
+enterGalleryBtn.addEventListener('mouseleave', () => {
+  requestAnimationFrame(() => {
+    glowEyesLayer.classList.remove('isGlowing');
+  });
+});
+// hoverIntensityToggle

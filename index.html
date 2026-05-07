@@ -1,30 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" 
-        content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lam Nguyen | The Splash</title>
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
   <div id="pinkFlashOverlay"></div>
+  
   <main id="mainContainer">
-    <div class="heroCanvas"></div>
+    <div class="heroCanvas baseImage"></div>
+    
+    <div class="heroCanvas eyesOverlay" 
+         id="glowEyesLayer"></div>
+    
     <section class="splashContent interactiveCard">
       <div class="backdropDim"></div>
+      
       <div class="textContent">
         <h1 class="developerName tossIn">Lam Nguyen</h1>
+        
         <p class="developerSubtitle">
           Web & Application Developer
         </p>
+        
         <button id="enterGalleryBtn" class="primaryButton tossIn">
-          Enter Portal
+          Deploy Portfolio
         </button>
       </div>
-      </section>
-    </main>
+    </section>
+  </main>
+
   <script src="js/main.js"></script>
 </body>
 </html>
