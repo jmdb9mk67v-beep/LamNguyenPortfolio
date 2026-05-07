@@ -22,12 +22,12 @@ const lamKnowledge = {
       company: "Precision e-Business Group",
       projectLead: "Peter Jowahir",
       startDate: "May 18, 2026",
-      details: "Focusing on technical development and Zoho Zia Agent integration."
+      details: "Focusing on technical development and Zoho Zia Agent."
     },
     {
       role: "Realtor & Accommodation Manager",
       company: "Independent",
-      details: "Managed client relations and high-value property logistics."
+      details: "Managed client relations and high-value logistics."
     }
   ],
   technicalArsenal: {
@@ -38,18 +38,19 @@ const lamKnowledge = {
   flagshipProjects: [
     {
       title: "Conflict to Pump",
-      focus: "Geopolitical data engine tracking global conflicts vs Canadian gas prices."
+      focus: "Geopolitical data engine tracking gas prices."
     },
     {
       title: "Mint & Measure",
-      focus: "Culinary web suite featuring API-driven ingredient management."
+      focus: "Culinary web suite featuring API-driven management."
     },
     {
       title: "Heartland Harmony",
-      focus: "High-fidelity UI/UX prototype for a country music festival."
+      focus: "High-fidelity UI/UX prototype for country music fest."
     }
   ],
-  systemDirective: "You are an AI assistant representing Lam Nguyen. Answer questions concisely and professionally based strictly on this dataset."
+  systemDirective: `You are Sam, Lam's digital assistant. 
+  Answer professionally using this data: `
 };
 // lamKnowledgeBaseExport
 
@@ -63,15 +64,19 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
   
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed. Use POST." });
+    return res.status(405).json({ 
+      error: "Method not allowed. Use POST." 
+    });
   }
 
   try {
     /* --- 2. ENVIRONMENT & PAYLOAD VALIDATION --- */
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      console.error("FATAL: GEMINI_API_KEY is missing in Vercel settings.");
-      return res.status(500).json({ error: "Server configuration error." });
+      console.error("FATAL: GEMINI_API_KEY is missing.");
+      return res.status(500).json({ 
+        error: "Server configuration error." 
+      });
     }
 
     const requestBody = typeof req.body === "string" 
@@ -80,22 +85,21 @@ export default async function handler(req, res) {
 
     const { 
       history = [], 
-      prompt, 
-      systemInstruction 
+      prompt 
     } = requestBody;
 
     if (!prompt) {
-      return res.status(400).json({ error: "No prompt provided." });
+      return res.status(400).json({ 
+        error: "No prompt provided." 
+      });
     }
 
     /* --- 3. PAYLOAD ARCHITECTURE (The Sandwich) --- */
-    /* Gemini requires alternating roles: user -> model -> user */
     const contents = history.map((item) => ({
       role: item.role === "user" ? "user" : "model",
       parts: [{ text: item.content }]
     }));
 
-    /* Append the fresh user query to the history chain */
     contents.push({ 
       role: "user", 
       parts: [{ text: prompt }] 
@@ -104,19 +108,25 @@ export default async function handler(req, res) {
     /* --- 4. SECURE TRANSMISSION TO GOOGLE --- */
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
+    /* Combine directive with stringified data */
+    const fullInstruction = `
+      ${lamKnowledge.systemDirective} 
+      ${JSON.stringify(lamKnowledge)}
+    `;
+
     const geminiResponse = await fetch(geminiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: contents,
         system_instruction: {
-          parts: [{ text: systemInstruction || "You are Sam, a helpful and friendly assistant." }]
+          parts: [{ text: fullInstruction }]
         },
         generationConfig: {
-          temperature: 0.75,   /* Balance between creative & factual */
-          topP: 0.95,          /* High diversity of word choice */
-          topK: 40,            /* Limits 'hallucinations' */
-          maxOutputTokens: 800 /* Prevents overly long, expensive responses */
+          temperature: 0.75,
+          topP: 0.95,
+          topK: 40,
+          maxOutputTokens: 800
         }
       })
     });
@@ -129,18 +139,18 @@ export default async function handler(req, res) {
       return res.status(geminiResponse.status).json(data);
     }
 
-    /* Handle edge case where Google blocks the response for safety */
     if (!data.candidates || data.candidates.length === 0) {
       return res.status(200).json({
         candidates: [{ 
           content: { 
-            parts: [{ text: "I cannot fulfill this request due to safety filters." }] 
+            parts: [{ 
+              text: "I cannot fulfill this request right now." 
+            }] 
           } 
         }]
       });
     }
 
-    /* Return the verified data to the frontend */
     return res.status(200).json(data);
 
   } catch (err) {
@@ -151,3 +161,4 @@ export default async function handler(req, res) {
     });
   }
 }
+// lamBackendChatLogicWired
