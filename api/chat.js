@@ -2,6 +2,58 @@
  * Vercel Serverless Handler: Sam AI Bridge (Production Grade)
  * Optimized for Gemini 2.5 Flash with Stateful Memory.
  */
+
+const lamKnowledge = {
+  personalDetails: {
+    name: "Lam Nguyen",
+    tagline: "Web & Application Developer",
+    academicPerformance: "98% average",
+    currentStatus: "Available for technical inquiries"
+  },
+  education: {
+    institution: "triOS College",
+    program: "Web and Development Fundamentals",
+    mentor: "Michael Lewis",
+    timeline: "September 2025 to July 2026"
+  },
+  careerExperience: [
+    {
+      role: "Application Developer Intern",
+      company: "Precision e-Business Group",
+      projectLead: "Peter Jowahir",
+      startDate: "May 18, 2026",
+      details: "Focusing on technical development and Zoho Zia Agent integration."
+    },
+    {
+      role: "Realtor & Accommodation Manager",
+      company: "Independent",
+      details: "Managed client relations and high-value property logistics."
+    }
+  ],
+  technicalArsenal: {
+    languages: ["JavaScript", "Java", "Swift", "HTML5", "CSS3"],
+    architecture: ["REST APIs", "DOM Manipulation", "Vanilla JS"],
+    design: ["Figma", "Glassmorphism", "CSS Grid & Flexbox"]
+  },
+  flagshipProjects: [
+    {
+      title: "Conflict to Pump",
+      focus: "Geopolitical data engine tracking global conflicts vs Canadian gas prices."
+    },
+    {
+      title: "Mint & Measure",
+      focus: "Culinary web suite featuring API-driven ingredient management."
+    },
+    {
+      title: "Heartland Harmony",
+      focus: "High-fidelity UI/UX prototype for a country music festival."
+    }
+  ],
+  systemDirective: "You are an AI assistant representing Lam Nguyen. Answer questions concisely and professionally based strictly on this dataset."
+};
+// lamKnowledgeBaseExport
+
+
 export default async function handler(req, res) {
   /* --- 1. PRE-FLIGHT & SECURITY GATEKEEPER --- */
   res.setHeader("Access-Control-Allow-Origin", "*");
