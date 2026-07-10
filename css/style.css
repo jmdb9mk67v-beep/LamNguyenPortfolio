@@ -484,7 +484,26 @@ footer {
 .social-link:hover .social-icon {
   transform: translateY(-4px) scale(1.05);
 }
-/* End of clean social styling */
+
+/* 
+  Standardizing the custom Zoho PNG 
+  to match the Devicon grid aesthetic.
+*/
+.zoho-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 0.5rem; /* Centering and spacing like Devicons */
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Applying signature hover effect to the container */
+.tech-item:hover .zoho-icon {
+  transform: translateY(-4px) scale(1.05);
+}
+/* End of Zoho styling */
+
 
 .prototype-wrapper {
   display: flex;
