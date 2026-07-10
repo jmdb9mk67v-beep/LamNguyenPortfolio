@@ -461,24 +461,30 @@ footer {
   100% { transform: scale(1); opacity: 1; }
 }
 
+/* Cleaned up social styles.
+  Removed references to <i> tags 
+  to prevent layout interference.
+*/
 .social-div {
   display: flex;
+  flex-direction: row; /* Forces horizontal alignment */
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  opacity: 0.98;
+  margin-top: 2rem;
 }
 
-.social-link i {
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  color: #fff;
-  transition: transform 0.3s ease, color 0.3s ease;
+.social-icon {
+  width: 64px;
+  height: 64px;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.social-link:hover i {
-  transform: translateY(-5px);
-  color: #ccc;
+.social-link:hover .social-icon {
+  transform: translateY(-4px) scale(1.05);
 }
+/* End of clean social styling */
 
 .prototype-wrapper {
   display: flex;
