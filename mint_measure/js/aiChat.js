@@ -1,8 +1,6 @@
 /**
  * AI Chatbox Section (Sous-Chef Fresh)
  * Configuration and DOM Selectors.
- * We are keeping the legacy naming conventions 
- * (CHAT_ENDPOINT) as specifically requested.
  */
 const CHAT_ENDPOINT = 'https://lam-nguyen-portfolio-three.vercel.app/api/chat';
 const chatToggle = document.querySelector('#chatToggle');
@@ -13,7 +11,6 @@ const sendBtn = document.querySelector('#sendBtn');
 
 /**
  * Event Listeners Initialization.
- * Handles UI toggles and enter key presses.
  */
 if (chatToggle) {
     chatToggle.addEventListener('click', function() {
@@ -38,7 +35,6 @@ if (chatInput) {
 
 /**
  * DOM Helper.
- * Auto-scrolls the chat window to the newest message.
  */
 function scrollToBottom() {
     if (chatMessages) {
@@ -48,8 +44,6 @@ function scrollToBottom() {
 
 /**
  * Main Function: Send Message.
- * Captures user input, builds the UI bubble, 
- * and triggers the Vercel fetch request.
  */
 function sendMessage() {
     const message = chatInput.value.trim();
@@ -58,7 +52,6 @@ function sendMessage() {
     const userMsg = document.createElement('div');
     userMsg.textContent = message; 
     
-    // Retaining kebab-case as requested
     userMsg.classList.add('message-bubble', 'user-message'); 
     chatMessages.appendChild(userMsg);
 
@@ -73,43 +66,25 @@ function sendMessage() {
 
 /**
  * Fetch Function.
- * Talks directly to the new Vercel backend.
- * Console logs updated to reflect the new host.
+ * Connects to Vercel backend using the 'sousChef' persona.
  */
 function fetchAIResponse(message) {
     const aiMsg = document.createElement('div');
-    aiMsg.textContent = 
-      "Sous-chef Fresh is cooking up an answer...";
+    aiMsg.textContent = "Sous-chef Fresh is cooking up an answer...";
       
-    // Retaining kebab-case as requested
     aiMsg.classList.add('message-bubble', 'ai-message'); 
     chatMessages.appendChild(aiMsg);
     scrollToBottom();
-
-    const chefInstruction = `
-        You are Sous-chef Fresh, a friendly and professional 
-        culinary assistant and digital sous-chef on demand 
-        for the website 'Mint & Measure'. 
-        You love food, cooking, and nutrition. You are a health 
-        expert and like to help people live longer.
-        Keep your answers short, helpful, concise, and easy to read. 
-        If the user asks a non-food question, you can answer it, 
-        but try to use a cooking metaphor if possible.
-        You were created by Lam Studios founded by a super  
-        smart developer. 
-        You can try to end each conversation with a funny joke 
-        or an inspirational quote.
-    `;
-    
-    const fullPrompt = 
-      chefInstruction + "\nUser Question: " + message;
 
     fetch(CHAT_ENDPOINT, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: fullPrompt }) 
+        body: JSON.stringify({ 
+            prompt: message,
+            persona: 'sousChef'
+        }) 
     })
     .then(response => response.json()) 
     .then(data => {
@@ -120,7 +95,6 @@ function fetchAIResponse(message) {
             aiResponseText = 
               data.candidates[0].content.parts[0].text;
         } else if (data.error) {
-             // Updated error log for Vercel
              console.error("Vercel Error:", data.error);
              aiResponseText = 
                "Sorry, I am having trouble connecting to the kitchen.";

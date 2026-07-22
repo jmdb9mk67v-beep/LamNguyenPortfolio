@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "Designing Intelligent Web Experiences with Precision",
       "Application Developer",
       "Human-Led. AI-Enhanced. Web Excellence.",
-      "Code by Lam", 
+      "Code by Lam"
     ];
 
     let phraseIdx = 0, charIdx = 0, isDeleting = false, speed = 100;
@@ -56,30 +56,170 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  /* --- 4. 3D INTERACTIVE ENGINE --- */
-  const interactiveElements = document.querySelectorAll('.project-card, .ai-chat-window');
-  
-  interactiveElements.forEach(el => {
-    el.addEventListener('mousemove', (e) => {
-      const rect = el.getBoundingClientRect();
+  /* --- 4. HIGH-PERFORMANCE INTERACTIVE ENGINE --- */
+  const projectsGrid = document.querySelector('.projects-grid');
+  const aiChatWindow = document.querySelector('#ai-chat-window');
+  const loadingSentinel = document.querySelector('#loadingSentinel');
+
+  /* Optimized 3D cursor tracking engine utilizing event 
+     delegation on the parent projects container. */
+  if (projectsGrid) {
+    projectsGrid.addEventListener('mousemove', (e) => {
+      const card = e.target.closest('.project-card');
+      if (!card) return;
+
+      const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       
-      el.style.setProperty('--px', `${(x / rect.width) * 100}%`);
-      el.style.setProperty('--py', `${(y / rect.height) * 100}%`);
-      el.style.setProperty('--rx', `${(0.5 - (y / rect.height)) * 4}deg`);
-      el.style.setProperty('--ry', `${((x / rect.width) - 0.5) * 4}deg`);
+      card.style.setProperty('--px', `${(x / rect.width) * 100}%`);
+      card.style.setProperty('--py', `${(y / rect.height) * 100}%`);
+      card.style.setProperty('--rx', `${(0.5 - (y / rect.height)) * 4}deg`);
+      card.style.setProperty('--ry', `${((x / rect.width) - 0.5) * 4}deg`);
     });
 
-    el.addEventListener('mouseleave', () => {
-      el.style.setProperty('--px', '50%');
-      el.style.setProperty('--py', '50%');
-      el.style.setProperty('--rx', '0deg');
-      el.style.setProperty('--ry', '0deg');
+    projectsGrid.addEventListener('mouseleave', (e) => {
+      const card = e.target.closest('.project-card');
+      if (!card) return;
+
+      card.style.setProperty('--px', '50%');
+      card.style.setProperty('--py', '50%');
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
+    }, true);
+  }
+
+  /* Static element cursor tracking context for the AI Chat widget */
+  if (aiChatWindow) {
+    aiChatWindow.addEventListener('mousemove', (e) => {
+      const rect = aiChatWindow.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      aiChatWindow.style.setProperty('--px', `${(x / rect.width) * 100}%`);
+      aiChatWindow.style.setProperty('--py', `${(y / rect.height) * 100}%`);
+      aiChatWindow.style.setProperty('--rx', `${(0.5 - (y / rect.height)) * 4}deg`);
+      aiChatWindow.style.setProperty('--ry', `${((x / rect.width) - 0.5) * 4}deg`);
     });
+
+    aiChatWindow.addEventListener('mouseleave', () => {
+      aiChatWindow.style.setProperty('--px', '50%');
+      aiChatWindow.style.setProperty('--py', '50%');
+      aiChatWindow.style.setProperty('--rx', '0deg');
+      aiChatWindow.style.setProperty('--ry', '0deg');
+    });
+  }
+
+  /* --- 5. INFINITE SCROLL GENERATOR PIPELINE --- */
+  let isFetching = false;
+  let hasMoreData = true;
+  let currentPage = 1;
+
+  async function fetchNextProjects() {
+    isFetching = true;
+    console.log(`Pipeline Active: Fetching page ${currentPage}...`);
+
+    const mockDatabase = {
+      page1: [
+        {
+          title: "Oasis Youth Care App",
+          desc: "Module testing and structural optimization focused on the dynamic Mentee Module architecture.",
+          link: "#"
+        },
+        {
+          title: "Precision Analytics Hub",
+          desc: "A localized performance utility tracking client engagement matrices and enterprise telemetry.",
+          link: "#"
+        }
+      ],
+      page2: [
+        {
+          title: "Fortnite Stat Tracker",
+          desc: "A compact JSON-driven profile viewer pulling real-time player statistics and platform metadata.",
+          link: "#"
+        }
+      ]
+    };
+
+    // Simulate an async asset loading latency threshold
+    await new Promise(resolve => setTimeout(resolve, 800));
+    const currentBatch = mockDatabase[`page${currentPage}`];
+
+    if (currentBatch && currentBatch.length > 0) {
+      const fragment = document.createDocumentFragment();
+
+      currentBatch.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'project-card dynamic-entry';
+        
+        card.innerHTML = `
+          <h3>${project.title}</h3>
+          <p>${project.desc}</p>
+          <a href="${project.link}" 
+             target="_blank"
+             rel="noopener noreferrer" 
+             class="btn-visit">View Project</a>
+        `;
+        fragment.appendChild(card);
+      });
+
+      projectsGrid.appendChild(fragment);
+      currentPage++;
+    }
+
+    // Terminate lifecycle gracefully if the data pool ends
+    if (!mockDatabase[`page${currentPage}`]) {
+      hasMoreData = false;
+      console.log("All projects loaded. Powering down gallery observer.");
+      galleryObserver.disconnect();
+      if (loadingSentinel) loadingSentinel.style.display = 'none';
+    }
+
+    isFetching = false;
+  }
+
+  const triggerNextBatch = (entries) => {
+    const [entry] = entries;
+    if (entry.isIntersecting && !isFetching && hasMoreData) {
+      fetchNextProjects();
+    }
+  };
+
+  const galleryObserver = new IntersectionObserver(triggerNextBatch, {
+    root: null,
+    rootMargin: '200px',
+    threshold: 0
   });
 
-  /* --- 5. FORMSPREE PIPELINE --- */
+  if (loadingSentinel) {
+    galleryObserver.observe(loadingSentinel);
+  }
+
+  /* --- 6. SCROLL-DRIVEN ENTRY REVEAL ENGINE --- */
+  /* Centralized, optimized Intersection Observer managing the spatial entry 
+     animations for the primary document container blocks. */
+  const initGlobalScrollReveal = () => {
+    const revealTargets = document.querySelectorAll('.scrollReveal');
+    if (revealTargets.length === 0) return;
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealActive');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.15
+    });
+
+    revealTargets.forEach(target => revealObserver.observe(target));
+  };
+  initGlobalScrollReveal();
+
+  /* --- 7. FORMSPREE PIPELINE --- */
   const contactForm = document.querySelector('#contact-form');
   const formStatus = document.querySelector('#form-status');
   if (contactForm) {
@@ -104,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-/* --- 6. AI INTEGRATION ENGINE (Sam with Memory) --- */
+  /* --- 8. AI INTEGRATION ENGINE (Sam with Memory) --- */
   const chatEndpoint = '/api/chat'; 
   const aiToggle = document.querySelector('#ai-toggle-btn');
   const aiClose = document.querySelector('#ai-close-btn');
@@ -114,14 +254,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const aiMessages = document.querySelector('#ai-chat-messages');
   const aiSubmit = document.querySelector('.ai-submit-btn');
 
-  /* Persistent memory array to stop the repetition loop */
   let chatHistory = [];
 
   const scrollToBottom = () => { 
     if (aiMessages) aiMessages.scrollTop = aiMessages.scrollHeight; 
   };
 
-  /* UI state management: Opens the Sam window */
   if (aiToggle && aiWindow) {
     aiToggle.addEventListener('click', () => {
       aiWindow.classList.add('active');
@@ -131,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* UI state management: Closes the Sam window */
   if (aiClose && aiWindow) {
     aiClose.addEventListener('click', () => {
       aiWindow.classList.remove('active');
@@ -140,7 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* Logic for stateful conversation and history tracking */
   if (aiForm) {
     aiForm.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -163,27 +299,26 @@ document.addEventListener('DOMContentLoaded', () => {
       aiMessages.appendChild(thinkingDiv);
       scrollToBottom();
 
-      const systemContext =   `You are Sam, the friendly and helpful AI Co-Pilot 
-                              for Lam Nguyen, Web Developer. 
+      const systemContext = `You are Sam, the friendly and helpful AI Co-Pilot 
+                            for Lam Nguyen, Web Developer. 
 
-                              VERIFIED IDENTITY:
-                              - Name: Lam Nguyen
-                              - Role: Web and Application Developer (triOS College Student)
-                              - Academic Record: 98% average.
+                            VERIFIED IDENTITY:
+                            - Name: Lam Nguyen
+                            - Role: Web and Application Developer (triOS College Graduate)
+                            - Academic Record: 98% average.
 
-                              OFFICIAL CONTACT LINKS:
-                              - GitHub: https://github.com/jmdb9mk67v-beep
-                              - LinkedIn: https://www.linkedin.com/in/lam-nguyen-91ba10387/
-                              - Portfolio: https://lamnguyen.ca
-                              - Email: Use Contact Form 
+                            OFFICIAL CONTACT LINKS:
+                            - GitHub: https://github.com/jmdb9mk67v-beep
+                            - LinkedIn: https://www.linkedin.com/in/lam-nguyen-91ba10387/
+                            - Portfolio: https://lamnguyen.ca
+                            - Email: Use Contact Form 
 
-                              RESPONSE STYLE:
-                              - Be concise and professional.
-                              - Never guess usernames or URLs. 
-                              - Use the verified links provided above ONLY.
-                              - If asked about "him," refer to Lam Nguyen.`;
+                            RESPONSE STYLE:
+                            - Be concise and professional.
+                            - Never guess usernames or URLs. 
+                            - Use the verified links provided above ONLY.
+                            - If asked about "him," refer to Lam Nguyen.`;
 
-      /* Construct payload with memory buffer */
       const payload = { 
         prompt: message,
         history: chatHistory,
@@ -202,11 +337,9 @@ document.addEventListener('DOMContentLoaded', () => {
           text = data.candidates[0].content.parts[0].text;
         }
         
-        /* Store turn in memory for the next exchange */
         chatHistory.push({ role: 'user', content: message });
         chatHistory.push({ role: 'model', content: text });
 
-        /* Keep history light (last 10 messages) */
         if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);
 
         thinkingDiv.innerHTML = text
@@ -224,29 +357,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 }); 
 
-/* Navigation Menu */
-
+/* --- 9. NAVIGATION LAYOUT COMPONENT --- */
 document.addEventListener('DOMContentLoaded', () => {
   const sideNav = document.querySelector('#sideNav');
   const navToggle = document.querySelector('#navToggle');
   const navLinks = document.querySelectorAll('.navLink');
-  // variableDeclarations
 
   if (navToggle && sideNav) {
     navToggle.addEventListener('click', (e) => {
       e.preventDefault();
-      e.stopPropagation(); // Stops the click from 'bleeding' into other elements
+      e.stopPropagation();
       sideNav.classList.toggle('navOpen');
       console.log('Mobile menu state toggled');
     });
   }
-  // mobileToggleLogic
 
   navLinks.forEach((link) => {
     link.addEventListener('click', () => {
       sideNav.classList.remove('navOpen');
     });
   });
-  // linkAutoCloseLogic
 });
-// navEngineInitialized

@@ -1,18 +1,20 @@
 /**
- * Vercel Serverless Handler: Sam AI Bridge (Production Grade)
- * Optimized for Gemini 2.5 Flash with Stateful Memory.
+ * Vercel Serverless Handler: AI Persona Router (Production Grade)
+ * Optimized for Gemini 2.5 Flash with Dynamic Persona Switching.
  */
 
+/* Knowledge base for Sam (Updated Portfolio Persona) */
 const lamKnowledge = {
   personalDetails: {
     name: "Lam Nguyen",
-    tagline: "Web & Application Developer",
-    academicPerformance: "98% average",
-    currentStatus: "Available for technical inquiries"
+    tagline: "Junior Web & Application Developer",
+    academicPerformance: "98.4% average (Program Graduate)",
+    currentStatus: "Actively seeking full-time opportunities as a Junior Web and App Developer"
   },
   education: {
     institution: "triOS College",
     program: "Web and Development Fundamentals",
+    status: "Graduated / Successfully Completed",
     mentor: "Michael Lewis",
     timeline: "September 2025 to July 2026"
   },
@@ -21,8 +23,8 @@ const lamKnowledge = {
       role: "Application Developer Intern",
       company: "Precision e-Business Group",
       projectLead: "Peter Jowahir",
-      startDate: "May 18, 2026",
-      details: "Focusing on technical development and Zoho Zia Agent."
+      status: "Successfully Completed",
+      details: "Led the full-cycle app development and deployment for Oasis Youth Care, alongside technical work with Zoho Creator using Deluge."
     },
     {
       role: "Realtor & Accommodation Manager",
@@ -32,10 +34,14 @@ const lamKnowledge = {
   ],
   technicalArsenal: {
     languages: ["JavaScript", "Java", "Swift", "HTML5", "CSS3"],
-    architecture: ["REST APIs", "DOM Manipulation", "Vanilla JS"],
+    architecture: ["REST APIs", "DOM Manipulation", "Vanilla JS", "Full-Stack Web/App Development"],
     design: ["Figma", "Glassmorphism", "CSS Grid & Flexbox"]
   },
   flagshipProjects: [
+    {
+      title: "Oasis Youth Care App",
+      focus: "Full-scale application engineered during development internship at Precision e-Business Group."
+    },
     {
       title: "Conflict to Pump",
       focus: "Geopolitical data engine tracking gas prices."
@@ -50,10 +56,24 @@ const lamKnowledge = {
     }
   ],
   systemDirective: `You are Sam, Lam's digital assistant. 
-  Answer professionally using this data: `
+  Answer professionally using this data to help highlight Lam's background to potential employers and technical contacts: `
 };
-// lamKnowledgeBaseExport
 
+/* System Instruction for Sous-Chef Fresh */
+const sousChefInstruction = `
+  You are Sous-chef Fresh, a friendly and professional 
+  culinary assistant and digital sous-chef on demand 
+  for the website 'Mint & Measure'. 
+  You love food, cooking, and nutrition. You are a health 
+  expert and like to help people live longer.
+  Keep your answers short, helpful, concise, and easy to read. 
+  If the user asks a non-food question, you can answer it, 
+  but try to use a cooking metaphor if possible.
+  You were created by Lam Studios founded by a super  
+  smart and sexy developer. 
+  You can try to end each conversation with a funny joke 
+  or an inspirational quote.
+`;
 
 export default async function handler(req, res) {
   /* --- 1. PRE-FLIGHT & SECURITY GATEKEEPER --- */
@@ -85,7 +105,8 @@ export default async function handler(req, res) {
 
     const { 
       history = [], 
-      prompt 
+      prompt,
+      persona 
     } = requestBody;
 
     if (!prompt) {
@@ -94,7 +115,7 @@ export default async function handler(req, res) {
       });
     }
 
-    /* --- 3. PAYLOAD ARCHITECTURE (The Sandwich) --- */
+    /* --- 3. PAYLOAD ARCHITECTURE --- */
     const contents = history.map((item) => ({
       role: item.role === "user" ? "user" : "model",
       parts: [{ text: item.content }]
@@ -105,14 +126,21 @@ export default async function handler(req, res) {
       parts: [{ text: prompt }] 
     });
 
-    /* --- 4. SECURE TRANSMISSION TO GOOGLE --- */
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    /* --- 4. DYNAMIC INSTRUCTION ROUTING --- */
+    let selectedInstruction = "";
 
-    /* Combine directive with stringified data */
-    const fullInstruction = `
-      ${lamKnowledge.systemDirective} 
-      ${JSON.stringify(lamKnowledge)}
-    `;
+    if (persona === "sousChef") {
+      selectedInstruction = sousChefInstruction;
+    } else {
+      /* Default to Sam & Portfolio Knowledge */
+      selectedInstruction = `
+        ${lamKnowledge.systemDirective} 
+        ${JSON.stringify(lamKnowledge)}
+      `;
+    }
+
+    /* --- 5. SECURE TRANSMISSION TO GOOGLE --- */
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const geminiResponse = await fetch(geminiUrl, {
       method: "POST",
@@ -120,7 +148,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         contents: contents,
         system_instruction: {
-          parts: [{ text: fullInstruction }]
+          parts: [{ text: selectedInstruction }]
         },
         generationConfig: {
           temperature: 0.75,
@@ -133,7 +161,7 @@ export default async function handler(req, res) {
 
     const data = await geminiResponse.json();
 
-    /* --- 5. RESPONSE INTEGRITY CHECK --- */
+    /* --- 6. RESPONSE INTEGRITY CHECK --- */
     if (!geminiResponse.ok) {
       console.error("Gemini API Error:", data);
       return res.status(geminiResponse.status).json(data);
@@ -161,4 +189,3 @@ export default async function handler(req, res) {
     });
   }
 }
-// lamBackendChatLogicWired

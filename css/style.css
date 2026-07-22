@@ -235,6 +235,32 @@ header, main, footer {
   margin-bottom: 1.5rem;
 }
 
+/* START: Phase 4 - Dynamic Card Entry Polish */
+/* Ensures that dynamically injected project cards 
+   receive a buttery-smooth fade and hardware-accelerated 
+   slide-up animation without forcing layout thrashing. */
+
+.projects-grid .project-card {
+  /* This ensures all future cards utilize the GPU for movement */
+  will-change: transform, box-shadow, opacity;
+}
+
+/* We create a specialized modifier class for our JS injection 
+   so the animation resets and triggers the moment it enters the DOM */
+.project-card.dynamic-entry {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: dynamic-card-fade 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes dynamic-card-fade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* END: Phase 4 - Dynamic Card Entry Polish */
+
 .btn-visit {
   display: inline-block;
   text-align: center;
@@ -1035,3 +1061,35 @@ iframe {
   pointer-events: auto !important; /* Ensures the bar can be touched */
 }
 /* navVisibilityOverflowFix */
+
+/* START: Global Scroll-Driven Animation Engine Bedrock */
+/* Establishes hardware-accelerated resting states for elements 
+   waiting to enter the viewport. Utilizing transforms prevents 
+   the browser from re-triggering expensive layout reflows. */
+
+.scrollReveal {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: 
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* State A: The Rising Fade (Used for your Footer & Core Containers) */
+.scrollReveal.revealUp {
+  transform: translateY(30px);
+}
+
+/* State B: The Lateral Slide (Used for your Tech & Skills Blocks) */
+.scrollReveal.revealLeft {
+  transform: translateX(-30px);
+}
+
+/* The Trigger Master Class */
+/* When the JS observer spots the element, this class snaps 
+   on and gracefully returns the element to its natural flow position. */
+.scrollReveal.revealActive {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+/* END: Global Scroll-Driven Animation Engine Bedrock */
