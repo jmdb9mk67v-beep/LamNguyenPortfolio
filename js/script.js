@@ -121,23 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const mockDatabase = {
       page1: [
-        {
-          title: "Oasis Youth Care App",
-          desc: "Module testing and structural optimization focused on the dynamic Mentee Module architecture.",
-          link: "#"
-        },
-        {
-          title: "Precision Analytics Hub",
-          desc: "A localized performance utility tracking client engagement matrices and enterprise telemetry.",
-          link: "#"
-        }
+        
       ],
       page2: [
-        {
-          title: "Fortnite Stat Tracker",
-          desc: "A compact JSON-driven profile viewer pulling real-time player statistics and platform metadata.",
-          link: "#"
-        }
+        
       ]
     };
 
