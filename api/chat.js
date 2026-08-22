@@ -140,14 +140,14 @@ export default async function handler(req, res) {
     }
 
     /* --- 5. SECURE TRANSMISSION TO GOOGLE --- */
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const geminiResponse = await fetch(geminiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: contents,
-        system_instruction: {
+        systemInstruction: {
           parts: [{ text: selectedInstruction }]
         },
         generationConfig: {
