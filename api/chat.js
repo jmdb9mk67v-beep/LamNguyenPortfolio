@@ -11,13 +11,21 @@ const lamKnowledge = {
     academicPerformance: "98.4% average (Program Graduate)",
     currentStatus: "Actively seeking full-time opportunities as a Junior Web and App Developer"
   },
-  education: {
-    institution: "triOS College",
-    program: "Web and Development Fundamentals",
-    status: "Graduated / Successfully Completed",
-    mentor: "Michael Lewis",
-    timeline: "September 2025 to July 2026"
-  },
+   education: [
+    {
+      institution: "Sheridan College",
+      program: "Computer Systems Technician - Cyber Security",
+      status: "Enrolled / In Progress",
+      timeline: "September 2026 to Present"
+    },
+    {
+      institution: "triOS College",
+      program: "Web and Development Fundamentals",
+      status: "Graduated / Successfully Completed",
+      mentor: "Michael Lewis",
+      timeline: "September 2025 to July 2026"
+    }
+  ],
   careerExperience: [
     {
       role: "Application Developer Intern",
